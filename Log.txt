@@ -1,0 +1,387 @@
+15:36:12 [INFO] main — =======================================================
+15:36:12 [INFO] main — 🤖 CRYPTO FUTURES BOT v4
+15:36:12 [INFO] main — =======================================================
+15:36:12 [INFO] database — Base de datos inicializada correctamente
+15:36:12 [INFO] main — ✅ Base de datos lista
+15:36:12 [INFO] main — ✅ 🧪 PAPER TRADING | Pares: BTCUSDT, ETHUSDT, SOLUSDT, BNBUSDT, XRPU 
+SDT
+15:36:13 [INFO] exchange — 🔌 Exchange: Weex Futures API V3
+15:36:14 [INFO] macro — ✅ Análisis macro: Claude Haiku activo
+15:36:31 [INFO] telegram_bot — ✅ Monitor v3.1 iniciado
+15:36:31 [INFO] signal_tracker — 📡 Trackeando señal #7: XRPUSDT SHORT
+15:36:31 [INFO] signal_tracker — 📡 Trackeando señal #3: BNBUSDT SHORT
+15:36:31 [INFO] signal_tracker — 📡 Trackeando señal #2: BNBUSDT SHORT
+15:36:31 [INFO] signal_tracker — 📡 Trackeando señal #1: BNBUSDT SHORT
+15:36:31 [INFO] signal_tracker — 🔍 Signal tracker iniciado — 4 señales activas
+15:36:31 [INFO] main — 🚀 Sistema completo online:
+15:36:31 [INFO] main —    🤖 Bot Telegram: activo
+15:36:31 [INFO] main —    🌐 Dashboard: http://localhost:8080
+15:36:31 [INFO] main —    📡 WebSocket: ws://localhost:8080/ws/live
+15:37:38 [INFO] mtf — 🔍 MTF Analysis: BTCUSDT
+15:37:46 [INFO] mtf — 🔍 MTF Analysis: ETHUSDT
+15:37:54 [INFO] mtf — 🔍 MTF Analysis: SOLUSDT
+15:37:57 [INFO] mtf — ✅ Señal MTF: SOLUSDT SHORT | Confianza: 65%
+15:37:57 [INFO] signal_filter — ✅ Señal APROBADA: SOLUSDT SHORT | Grade: A+ | Score: 94/100
+ | Riesgo: 1.5%
+15:37:57 [INFO] database — Señal guardada ID=15 — SOLUSDT SHORT
+15:37:57 [INFO] signal_tracker — 📡 Nueva señal registrada para tracking: #15 SOLUSDT      
+15:38:00 [INFO] telegram_bot — 🎯 Señal A+ enviada: SOLUSDT SHORT
+15:38:06 [INFO] mtf — 🔍 MTF Analysis: BNBUSDT
+15:38:06 [INFO] yearly_backtest — Descargando ~2190 velas de BTCUSDT 4h (1 año ≈ 2190 velas de 4h)...
+15:38:06 [INFO] weex_client — Paginando 2190 velas de BTCUSDT 4h...
+15:38:19 [INFO] mtf — 🔍 MTF Analysis: XRPUSDT
+15:38:34 [INFO] mtf — 🔍 MTF Analysis: BTCUSDT
+15:38:43 [INFO] mtf — 🔍 MTF Analysis: ETHUSDT
+15:38:49 [INFO] weex_client — Total velas descargadas: 2190 (22 requests)
+15:38:49 [INFO] yearly_backtest — Datos descargados: 2189 velas (2025-04-13 20:00:00 → 2026-04-13 12:00:00)
+15:38:50 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:22.7 RSI:38.3 | Entry:$94,108.70 SL:$93,287.10 TP2:$97,395.10 R:R 4.0
+15:38:54 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:22.2 RSI:57.6 | Entry:$105,231.11 SL:$103,190.90 TP2:$113,391.90 R:R 4.0
+15:38:59 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:27.9 RSI:64.4 | Entry:$109,029.70 SL:$107,485.00 TP2:$115,208.50 R:R 4.0
+15:38:59 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:24.4 RSI:43.8 | Entry:$108,181.00 SL:$106,737.80 TP2:$113,953.80 R:R 4.0
+15:39:00 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:25.3 RSI:36.3 | Entry:$104,986.60 SL:$103,222.80 TP2:$112,041.80 R:R 4.0
+15:39:04 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:37.0 RSI:39.3 | Entry:$101,179.65 SL:$103,735.30 TP2:$90,957.00 R:R 4.0
+15:39:05 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:23.6 RSI:64.1 | Entry:$109,403.31 SL:$108,075.00 TP2:$114,716.60 R:R 4.0
+15:39:07 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:55.1 RSI:63.2 | Entry:$119,926.75 SL:$117,677.60 TP2:$128,923.30 R:R 4.0
+15:39:07 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:42.7 RSI:48.0 | Entry:$117,220.55 SL:$116,325.80 TP2:$120,799.60 R:R 4.0
+15:39:09 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:30.4 RSI:50.6 | Entry:$118,191.95 SL:$116,331.70 TP2:$125,633.00 R:R 4.0
+15:39:15 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:22.3 RSI:54.9 | Entry:$116,845.00 SL:$115,522.00 TP2:$122,137.00 R:R 4.0
+15:39:16 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:37.7 RSI:66.7 | Entry:$120,369.40 SL:$117,927.70 TP2:$130,136.20 R:R 4.0
+15:39:25 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:40.1 RSI:33.4 | Entry:$114,394.75 SL:$115,855.80 TP2:$108,550.60 R:R 4.0
+15:39:25 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:35.0 RSI:54.6 | Entry:$115,679.85 SL:$117,530.20 TP2:$108,278.50 R:R 4.0
+15:39:26 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:24.2 RSI:33.8 | Entry:$108,549.16 SL:$110,500.90 TP2:$100,742.20 R:R 4.0
+15:39:26 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:23.0 RSI:51.5 | Entry:$109,067.75 SL:$110,097.90 TP2:$104,947.20 R:R 4.0
+15:39:27 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:22.2 RSI:59.1 | Entry:$110,756.35 SL:$111,984.90 TP2:$105,842.20 R:R 4.0
+15:39:31 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:37.0 RSI:54.3 | Entry:$115,567.30 SL:$114,594.10 TP2:$119,460.10 R:R 4.0
+15:39:31 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:29.9 RSI:52.8 | Entry:$115,567.30 SL:$114,478.80 TP2:$119,921.30 R:R 4.0
+15:39:39 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:43.8 RSI:45.3 | Entry:$110,099.95 SL:$111,433.70 TP2:$104,765.00 R:R 4.0
+15:39:40 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:39.3 RSI:61.3 | Entry:$111,846.80 SL:$112,453.00 TP2:$109,422.00 R:R 4.0
+15:39:49 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:60.4 RSI:69.5 | Entry:$123,030.90 SL:$120,876.00 TP2:$131,650.50 R:R 4.0
+15:39:50 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:40.3 RSI:44.5 | Entry:$120,954.90 SL:$120,247.80 TP2:$123,783.30 R:R 4.0
+15:39:53 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:25.3 RSI:43.9 | Entry:$120,954.90 SL:$120,216.10 TP2:$123,910.10 R:R 4.0
+15:40:05 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:41.9 RSI:33.6 | Entry:$108,778.79 SL:$111,521.90 TP2:$97,806.30 R:R 4.0
+15:40:06 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:31.4 RSI:59.2 | Entry:$109,317.55 SL:$109,470.80 TP2:$108,704.60 R:R 4.0
+15:40:10 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:27.5 RSI:57.9 | Entry:$111,552.85 SL:$112,004.60 TP2:$109,745.80 R:R 4.0
+15:40:11 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:22.4 RSI:43.4 | Entry:$107,274.40 SL:$110,047.70 TP2:$96,181.20 R:R 4.0
+15:40:26 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:33.2 RSI:37.1 | Entry:$108,910.90 SL:$111,670.10 TP2:$97,874.10 R:R 4.0
+15:40:27 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:23.5 RSI:32.7 | Entry:$97,055.74 SL:$99,784.90 TP2:$86,139.10 R:R 4.0
+15:40:28 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:45.5 RSI:31.3 | Entry:$84,557.94 SL:$88,075.50 TP2:$70,487.70 R:R 4.0
+15:40:29 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:36.2 RSI:47.3 | Entry:$84,985.25 SL:$87,275.00 TP2:$75,826.20 R:R 4.0
+15:40:30 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:26.5 RSI:50.3 | Entry:$87,553.15 SL:$89,478.80 TP2:$79,850.50 R:R 4.0
+15:40:35 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:27.0 RSI:36.1 | Entry:$85,809.05 SL:$87,693.30 TP2:$78,272.00 R:R 4.0
+15:40:36 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:24.6 RSI:60.5 | Entry:$91,266.75 SL:$93,128.20 TP2:$83,821.00 R:R 4.0
+15:40:54 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:29.2 RSI:45.3 | Entry:$88,357.25 SL:$90,856.20 TP2:$78,361.50 R:R 4.0
+15:40:59 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:44.6 RSI:66.1 | Entry:$92,468.75 SL:$91,049.90 TP2:$98,144.20 R:R 4.0
+15:41:00 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:31.2 RSI:45.8 | Entry:$91,834.45 SL:$90,597.60 TP2:$96,781.90 R:R 4.0
+15:41:01 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:30.3 RSI:43.7 | Entry:$90,929.25 SL:$90,584.60 TP2:$92,307.80 R:R 4.0
+15:41:02 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:27.8 RSI:41.6 | Entry:$90,392.25 SL:$89,035.30 TP2:$95,820.00 R:R 4.0
+15:41:04 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:36.4 RSI:68.3 | Entry:$96,542.74 SL:$94,857.40 TP2:$103,284.10 R:R 4.0
+15:41:19 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:45.6 RSI:45.3 | Entry:$91,296.65 SL:$92,758.80 TP2:$85,448.00 R:R 4.0
+15:41:24 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:37.1 RSI:37.5 | Entry:$83,542.60 SL:$85,552.10 TP2:$75,504.60 R:R 4.0
+15:41:33 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:70.6 RSI:39.0 | Entry:$68,986.73 SL:$72,660.80 TP2:$54,290.50 R:R 4.0
+15:41:52 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:25.5 RSI:32.6 | Entry:$64,976.00 SL:$67,000.90 TP2:$56,876.40 R:R 4.0
+15:41:55 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:22.4 RSI:55.5 | Entry:$69,462.05 SL:$71,607.00 TP2:$60,882.30 R:R 4.0
+15:42:00 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:36.8 RSI:67.1 | Entry:$73,262.20 SL:$71,927.00 TP2:$78,603.00 R:R 4.0
+15:42:02 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:37.8 RSI:38.0 | Entry:$70,930.70 SL:$70,032.70 TP2:$74,522.70 R:R 4.0
+15:42:03 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:35.0 RSI:30.0 | Entry:$69,245.50 SL:$67,721.30 TP2:$75,342.30 R:R 4.0
+15:42:09 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:29.1 RSI:56.0 | Entry:$70,690.70 SL:$71,590.10 TP2:$67,093.10 R:R 4.0
+15:42:16 [INFO] technical — 🎯 Señal V2: BTCUSDT SHORT | ADX:32.4 RSI:47.1 | Entry:$67,499.25 SL:$69,385.10 TP2:$59,955.80 R:R 4.0
+15:42:24 [INFO] technical — 🎯 Señal V2: BTCUSDT LONG | ADX:43.7 RSI:65.5 | Entry:$71,581.00 SL:$70,216.30 TP2:$77,039.80 R:R 4.0
+15:42:24 [INFO] yearly_backtest — ✅ Backtest anual BTCUSDT: 52 trades | WR: 29.4% | R: -1.0
+0 | Capital: $191.09 | Rating: NECESITA MEJORA 🔴
+15:42:24 [INFO] telegram_bot — Backtest BTCUSDT: 51 trades, -1.00R
+15:42:24 [INFO] yearly_backtest — Descargando ~2190 velas de ETHUSDT 4h (1 año ≈ 2190 velas de 4h)...
+15:42:24 [INFO] weex_client — Paginando 2190 velas de ETHUSDT 4h...
+Execution of job "MarketMonitor.monitor_market (trigger: interval[0:01:00], next run at: 2026-04-13 15:39:31 CDT)" skipped: maximum number of running instances reached (1)
+Run time of job "MarketMonitor.monitor_news (trigger: interval[0:05:00], next run at: 2026-04-13 15:46:31 CDT)" was missed by 0:00:53.047496
+15:42:25 [INFO] mtf — 🔍 MTF Analysis: SOLUSDT
+Execution of job "MarketMonitor.monitor_market (trigger: interval[0:01:00], next run at: 2026-04-13 15:42:31 CDT)" skipped: maximum number of running instances reached (1)
+15:42:31 [INFO] mtf — ✅ Señal MTF: SOLUSDT SHORT | Confianza: 65%
+15:42:45 [INFO] mtf — 🔍 MTF Analysis: BNBUSDT
+15:43:01 [INFO] mtf — 🔍 MTF Analysis: XRPUSDT
+15:43:27 [INFO] weex_client — Total velas descargadas: 2190 (22 requests)
+15:43:27 [INFO] yearly_backtest — Datos descargados: 2189 velas (2025-04-13 20:00:00 → 2026-04-13 12:00:00)
+15:43:30 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:25.1 RSI:44.3 | Entry:$2,541.84 SL:$2,439.85 TP2:$2,949.80 R:R 4.0
+15:43:35 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:25.3 RSI:69.4 | Entry:$2,723.17 SL:$2,645.36 TP2:$3,034.43 R:R 4.0
+15:43:36 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:36.1 RSI:49.8 | Entry:$2,693.27 SL:$2,613.77 TP2:$3,011.27 R:R 4.0
+15:43:36 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:33.5 RSI:38.1 | Entry:$2,561.29 SL:$2,466.31 TP2:$2,941.21 R:R 4.0
+15:43:39 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:53.0 RSI:34.6 | Entry:$2,227.24 SL:$2,307.47 TP2:$1,906.32 R:R 4.0
+15:43:39 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:47.4 RSI:55.2 | Entry:$2,444.18 SL:$2,529.55 TP2:$2,102.68 R:R 4.0
+15:43:40 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:25.3 RSI:53.0 | Entry:$2,535.11 SL:$2,450.33 TP2:$2,874.25 R:R 4.0
+15:43:41 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:54.5 RSI:65.7 | Entry:$2,962.28 SL:$2,889.56 TP2:$3,253.16 R:R 4.0
+15:43:46 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:28.6 RSI:48.4 | Entry:$3,706.49 SL:$3,590.29 TP2:$4,171.31 R:R 4.0
+15:43:46 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:28.4 RSI:50.8 | Entry:$3,706.49 SL:$3,600.45 TP2:$4,130.68 R:R 4.0
+15:43:47 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:22.8 RSI:47.9 | Entry:$3,615.04 SL:$3,485.73 TP2:$4,132.28 R:R 4.0
+15:43:56 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:46.9 RSI:68.7 | Entry:$4,314.45 SL:$4,184.70 TP2:$4,833.46 R:R 4.0
+15:44:04 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:32.1 RSI:67.6 | Entry:$4,700.94 SL:$4,564.41 TP2:$5,247.06 R:R 4.0
+15:44:04 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:27.3 RSI:38.0 | Entry:$4,438.86 SL:$4,295.79 TP2:$5,011.16 R:R 4.0
+15:44:06 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:23.5 RSI:66.3 | Entry:$4,415.07 SL:$4,327.75 TP2:$4,764.35 R:R 4.0
+15:44:07 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:40.1 RSI:64.7 | Entry:$4,674.44 SL:$4,577.03 TP2:$5,064.10 R:R 4.0
+15:44:08 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:29.8 RSI:53.2 | Entry:$4,599.10 SL:$4,496.30 TP2:$5,010.30 R:R 4.0
+15:44:09 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:23.7 RSI:44.8 | Entry:$4,599.10 SL:$4,499.33 TP2:$4,998.18 R:R 4.0
+15:44:10 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:23.2 RSI:44.4 | Entry:$4,482.98 SL:$4,410.60 TP2:$4,772.50 R:R 4.0
+15:44:13 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:51.8 RSI:33.2 | Entry:$4,184.58 SL:$4,285.98 TP2:$3,778.96 R:R 4.0
+15:44:15 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:31.9 RSI:63.7 | Entry:$4,206.05 SL:$4,295.07 TP2:$3,849.98 R:R 4.0
+15:44:18 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:49.1 RSI:68.5 | Entry:$4,554.92 SL:$4,452.78 TP2:$4,963.50 R:R 4.0
+15:44:20 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:39.7 RSI:41.8 | Entry:$4,448.34 SL:$4,421.87 TP2:$4,554.22 R:R 4.0
+15:44:21 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:27.9 RSI:44.2 | Entry:$4,448.34 SL:$4,392.82 TP2:$4,670.42 R:R 4.0
+15:44:23 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:28.8 RSI:37.1 | Entry:$4,409.19 SL:$4,392.38 TP2:$4,476.43 R:R 4.0
+15:44:27 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:30.9 RSI:49.2 | Entry:$4,074.30 SL:$4,294.35 TP2:$3,194.07 R:R 4.0
+15:44:36 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:43.2 RSI:37.6 | Entry:$3,311.72 SL:$3,453.40 TP2:$2,745.01 R:R 4.0
+15:44:38 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:37.0 RSI:50.2 | Entry:$3,388.59 SL:$3,497.96 TP2:$2,951.08 R:R 4.0
+15:44:44 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:23.7 RSI:56.3 | Entry:$3,549.40 SL:$3,660.30 TP2:$3,105.80 R:R 4.0
+15:44:52 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:31.7 RSI:45.1 | Entry:$3,142.77 SL:$3,264.93 TP2:$2,654.13 R:R 4.0
+15:44:53 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:39.9 RSI:33.3 | Entry:$2,767.54 SL:$2,919.80 TP2:$2,158.49 R:R 4.0
+15:44:56 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:23.7 RSI:53.1 | Entry:$2,905.41 SL:$3,001.06 TP2:$2,522.83 R:R 4.0
+15:45:04 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:27.9 RSI:38.9 | Entry:$2,791.95 SL:$2,889.93 TP2:$2,400.03 R:R 4.0
+15:45:05 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:25.9 RSI:61.2 | Entry:$3,013.07 SL:$3,090.29 TP2:$2,704.19 R:R 4.0
+15:45:22 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:22.0 RSI:30.9 | Entry:$2,915.53 SL:$3,069.12 TP2:$2,301.19 R:R 4.0
+15:45:25 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:22.7 RSI:46.2 | Entry:$2,949.85 SL:$3,014.18 TP2:$2,692.53 R:R 4.0
+15:45:37 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:45.9 RSI:47.4 | Entry:$3,211.78 SL:$3,142.14 TP2:$3,490.32 R:R 4.0
+15:45:38 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:36.1 RSI:42.8 | Entry:$3,130.95 SL:$3,112.84 TP2:$3,203.41 R:R 4.0
+15:45:40 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:31.2 RSI:43.2 | Entry:$3,121.31 SL:$3,053.12 TP2:$3,394.05 R:R 4.0
+15:45:42 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:30.2 RSI:61.5 | Entry:$3,319.52 SL:$3,233.44 TP2:$3,663.86 R:R 4.0
+15:45:51 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:37.9 RSI:35.2 | Entry:$3,024.72 SL:$3,114.87 TP2:$2,664.12 R:R 4.0
+15:45:53 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:22.4 RSI:64.1 | Entry:$3,024.72 SL:$3,043.76 TP2:$2,948.56 R:R 4.0
+15:45:55 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:22.6 RSI:30.0 | Entry:$2,805.84 SL:$2,889.81 TP2:$2,469.96 R:R 4.0
+15:46:01 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:64.2 RSI:32.0 | Entry:$2,247.87 SL:$2,388.71 TP2:$1,684.51 R:R 4.0
+15:46:06 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:47.0 RSI:43.0 | Entry:$2,219.03 SL:$2,143.11 TP2:$2,522.73 R:R 4.0
+15:46:08 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:35.9 RSI:35.0 | Entry:$2,110.43 SL:$2,075.01 TP2:$2,252.13 R:R 4.0
+15:46:32 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:33.4 RSI:41.3 | Entry:$2,025.54 SL:$2,085.44 TP2:$1,785.94 R:R 4.0
+15:46:33 [INFO] technical — 🎯 Señal V2: ETHUSDT SHORT | ADX:23.2 RSI:49.7 | Entry:$2,025.54 SL:$2,089.64 TP2:$1,769.14 R:R 4.0
+15:46:37 [INFO] technical — 🎯 Señal V2: ETHUSDT LONG | ADX:28.7 RSI:64.3 | Entry:$2,171.60 SL:$2,064.10 TP2:$2,601.58 R:R 4.0
+15:46:37 [INFO] yearly_backtest — ✅ Backtest anual ETHUSDT: 49 trades | WR: 33.3% | R: +2.0
+0 | Capital: $203.34 | Rating: NECESITA MEJORA 🔴
+15:46:37 [INFO] telegram_bot — Backtest ETHUSDT: 48 trades, +2.00R
+15:46:37 [INFO] yearly_backtest — Descargando ~2190 velas de SOLUSDT 4h (1 año ≈ 2190 velas de 4h)...
+15:46:37 [INFO] weex_client — Paginando 2190 velas de SOLUSDT 4h...
+Run time of job "MarketMonitor.monitor_market (trigger: interval[0:01:00], next run at: 2026-04-13 15:47:31 CDT)" was missed by 0:00:06.544396
+Run time of job "MarketMonitor.monitor_news (trigger: interval[0:05:00], next run at: 2026-04-13 15:51:31 CDT)" was missed by 0:00:06.544626
+15:47:22 [INFO] weex_client — Total velas descargadas: 2190 (22 requests)
+15:47:22 [INFO] yearly_backtest — Datos descargados: 2189 velas (2025-04-13 20:00:00 → 2026-04-13 12:00:00)
+15:47:29 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:23.6 RSI:42.2 | Entry:$170.85 SL:$165.19 TP2:$193.47 R:R 4.0
+15:47:42 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:31.5 RSI:33.7 | Entry:$147.49 
+SL:$152.68 TP2:$126.72 R:R 4.0
+15:47:44 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:22.8 RSI:47.8 | Entry:$154.12 
+SL:$154.85 TP2:$151.22 R:R 4.0
+15:47:45 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:24.3 RSI:57.3 | Entry:$158.74 
+SL:$162.39 TP2:$144.13 R:R 4.0
+15:47:52 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:30.6 RSI:52.3 | Entry:$148.65 
+SL:$156.02 TP2:$119.19 R:R 4.0
+15:47:53 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:23.8 RSI:62.0 | Entry:$155.86 
+SL:$160.58 TP2:$136.96 R:R 4.0
+15:47:54 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:38.8 RSI:38.2 | Entry:$140.72 
+SL:$145.26 TP2:$122.57 R:R 4.0
+15:47:54 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:42.5 RSI:59.5 | Entry:$144.88 
+SL:$149.57 TP2:$126.14 R:R 4.0
+15:48:01 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:24.6 RSI:69.7 | Entry:$156.59 SL:$152.99 TP2:$171.00 R:R 4.0
+15:48:02 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:27.7 RSI:60.3 | Entry:$170.60 SL:$164.24 TP2:$196.05 R:R 4.0
+15:48:02 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:46.2 RSI:52.4 | Entry:$191.81 SL:$183.72 TP2:$224.19 R:R 4.0
+15:48:03 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:33.4 RSI:48.0 | Entry:$188.38 SL:$179.89 TP2:$222.37 R:R 4.0
+15:48:03 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:29.2 RSI:41.4 | Entry:$183.70 SL:$175.23 TP2:$217.58 R:R 4.0
+15:48:11 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:31.9 RSI:44.5 | Entry:$164.32 
+SL:$165.66 TP2:$158.95 R:R 4.0
+15:48:12 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:24.8 RSI:55.6 | Entry:$169.58 
+SL:$172.44 TP2:$158.16 R:R 4.0
+15:48:13 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:24.8 RSI:61.8 | Entry:$173.42 
+SL:$179.02 TP2:$151.01 R:R 4.0
+15:48:16 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:37.7 RSI:68.2 | Entry:$185.88 SL:$180.26 TP2:$208.37 R:R 4.0
+15:48:18 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:39.8 RSI:64.1 | Entry:$185.88 SL:$180.15 TP2:$208.82 R:R 4.0
+15:48:19 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:35.3 RSI:47.3 | Entry:$178.84 SL:$172.97 TP2:$202.30 R:R 4.0
+15:48:20 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:38.4 RSI:54.6 | Entry:$194.49 SL:$186.28 TP2:$227.33 R:R 4.0
+15:48:21 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:22.6 RSI:65.5 | Entry:$203.79 SL:$197.12 TP2:$230.48 R:R 4.0
+15:48:22 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:30.5 RSI:42.1 | Entry:$189.22 SL:$177.58 TP2:$235.77 R:R 4.0
+15:48:25 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:47.0 RSI:57.7 | Entry:$240.84 SL:$234.65 TP2:$265.62 R:R 4.0
+15:48:25 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:36.1 RSI:44.2 | Entry:$231.45 SL:$222.97 TP2:$265.37 R:R 4.0
+15:48:35 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:46.5 RSI:46.9 | Entry:$202.79 
+SL:$208.61 TP2:$179.50 R:R 4.0
+15:48:36 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:36.7 RSI:54.8 | Entry:$209.03 
+SL:$211.66 TP2:$198.47 R:R 4.0
+15:48:37 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:27.2 RSI:55.4 | Entry:$209.03 
+SL:$211.71 TP2:$198.28 R:R 4.0
+15:48:41 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:33.6 RSI:66.7 | Entry:$228.97 SL:$221.68 TP2:$258.14 R:R 4.0
+15:48:41 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:27.8 RSI:37.1 | Entry:$222.96 SL:$216.59 TP2:$248.44 R:R 4.0
+15:48:45 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:34.3 RSI:52.4 | Entry:$201.13 
+SL:$214.63 TP2:$147.15 R:R 4.0
+15:48:58 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:22.1 RSI:39.1 | Entry:$185.40 
+SL:$192.01 TP2:$158.94 R:R 4.0
+15:49:11 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:42.1 RSI:52.4 | Entry:$163.07 
+SL:$164.95 TP2:$155.57 R:R 4.0
+15:49:15 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:28.5 RSI:55.5 | Entry:$163.07 
+SL:$165.65 TP2:$152.79 R:R 4.0
+15:49:16 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:24.4 RSI:56.1 | Entry:$163.07 
+SL:$165.65 TP2:$152.79 R:R 4.0
+15:49:17 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:23.0 RSI:32.5 | Entry:$145.36 
+SL:$152.08 TP2:$118.47 R:R 4.0
+15:49:46 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:40.5 RSI:58.4 | Entry:$137.05 SL:$133.23 TP2:$152.34 R:R 4.0
+15:49:47 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:22.7 RSI:57.0 | Entry:$135.56 SL:$132.06 TP2:$149.59 R:R 4.0
+15:49:58 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:46.3 RSI:35.1 | Entry:$127.71 
+SL:$131.31 TP2:$113.32 R:R 4.0
+15:50:00 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:25.2 RSI:56.0 | Entry:$125.70 
+SL:$128.17 TP2:$115.81 R:R 4.0
+15:50:01 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:32.7 RSI:30.8 | Entry:$116.15 
+SL:$120.08 TP2:$100.42 R:R 4.0
+15:50:03 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:61.8 RSI:32.7 | Entry:$103.37 
+SL:$109.24 TP2:$79.91 R:R 4.0
+15:50:04 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:70.8 RSI:35.2 | Entry:$82.81 SL:$89.05 TP2:$57.86 R:R 4.0
+15:50:07 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:56.4 RSI:46.2 | Entry:$87.37 SL:$93.47 TP2:$62.97 R:R 4.0
+15:50:19 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:22.9 RSI:36.0 | Entry:$80.50 SL:$83.72 TP2:$67.63 R:R 4.0
+15:50:59 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:41.1 RSI:64.2 | Entry:$94.25 SL:$91.48 TP2:$105.34 R:R 4.0
+15:51:06 [INFO] technical — 🎯 Señal V2: SOLUSDT LONG | ADX:30.1 RSI:36.7 | Entry:$87.63 SL:$84.78 TP2:$99.04 R:R 4.0
+15:51:09 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:25.9 RSI:30.2 | Entry:$83.60 SL:$86.27 TP2:$72.91 R:R 4.0
+15:51:14 [INFO] technical — 🎯 Señal V2: SOLUSDT SHORT | ADX:29.0 RSI:32.9 | Entry:$78.58 SL:$81.33 TP2:$67.56 R:R 4.0
+15:51:47 [INFO] yearly_backtest — ✅ Backtest anual SOLUSDT: 48 trades | WR: 37.5% | R: +8.0
+0 | Capital: $228.91 | Rating: ACEPTABLE 🟡
+15:51:47 [INFO] telegram_bot — Backtest SOLUSDT: 48 trades, +8.00R
+15:51:47 [INFO] yearly_backtest — Descargando ~2190 velas de BNBUSDT 4h (1 año ≈ 2190 velas de 4h)...
+15:51:47 [INFO] weex_client — Paginando 2190 velas de BNBUSDT 4h...
+Run time of job "MarketMonitor.monitor_market (trigger: interval[0:01:00], next run at: 2026-04-13 15:52:31 CDT)" was missed by 0:00:16.552888
+Run time of job "MarketMonitor.monitor_news (trigger: interval[0:05:00], next run at: 2026-04-13 15:56:31 CDT)" was missed by 0:00:16.553077
+15:52:18 [INFO] database — Señal 15 cerrada: SL | PnL: -1.00R
+15:52:18 [INFO] signal_tracker — ❌ SL hit #15 SOLUSDT @ $84.02
+15:52:26 [INFO] weex_client — Total velas descargadas: 2190 (22 requests)
+15:52:26 [INFO] yearly_backtest — Datos descargados: 2189 velas (2025-04-13 20:00:00 → 2026-04-13 12:00:00)
+15:52:32 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:38.0 RSI:64.1 | Entry:$681.31 SL:$669.00 TP2:$730.56 R:R 4.0
+15:52:32 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:31.2 RSI:42.2 | Entry:$657.85 SL:$644.08 TP2:$712.94 R:R 4.0
+15:52:36 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:22.3 RSI:43.3 | Entry:$658.12 SL:$648.24 TP2:$697.62 R:R 4.0
+15:52:43 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:30.6 RSI:38.9 | Entry:$651.79 
+SL:$659.07 TP2:$622.66 R:R 4.0
+15:52:43 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:43.8 RSI:37.6 | Entry:$642.27 
+SL:$649.57 TP2:$613.09 R:R 4.0
+15:52:44 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:50.1 RSI:33.8 | Entry:$619.87 
+SL:$637.00 TP2:$551.36 R:R 4.0
+15:52:44 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:27.8 RSI:62.6 | Entry:$647.66 
+SL:$652.58 TP2:$627.96 R:R 4.0
+15:52:46 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:22.0 RSI:67.9 | Entry:$663.09 SL:$656.71 TP2:$688.60 R:R 4.0
+15:52:47 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:40.4 RSI:69.5 | Entry:$689.33 SL:$679.82 TP2:$727.40 R:R 4.0
+15:52:48 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:34.4 RSI:68.1 | Entry:$696.63 SL:$687.86 TP2:$731.68 R:R 4.0
+15:52:48 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:30.4 RSI:42.5 | Entry:$681.74 SL:$669.87 TP2:$729.23 R:R 4.0
+15:52:49 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:47.5 RSI:67.0 | Entry:$730.14 SL:$710.57 TP2:$808.46 R:R 4.0
+15:52:49 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:49.8 RSI:52.9 | Entry:$770.14 SL:$747.96 TP2:$858.87 R:R 4.0
+15:52:50 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:37.5 RSI:55.0 | Entry:$781.28 SL:$754.41 TP2:$888.80 R:R 4.0
+15:52:51 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:34.3 RSI:65.7 | Entry:$835.90 SL:$813.35 TP2:$926.12 R:R 4.0
+15:52:52 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:25.5 RSI:47.2 | Entry:$806.52 SL:$781.75 TP2:$905.56 R:R 4.0
+15:52:52 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:26.2 RSI:47.6 | Entry:$806.52 SL:$782.23 TP2:$903.67 R:R 4.0
+15:52:59 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:24.0 RSI:60.3 | Entry:$788.48 SL:$773.11 TP2:$849.98 R:R 4.0
+15:52:59 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:37.3 RSI:64.4 | Entry:$843.26 SL:$825.09 TP2:$915.91 R:R 4.0
+15:53:00 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:27.3 RSI:42.8 | Entry:$815.24 SL:$794.38 TP2:$898.66 R:R 4.0
+15:53:02 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:22.3 RSI:65.2 | Entry:$866.31 SL:$847.68 TP2:$940.84 R:R 4.0
+15:53:03 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:49.3 RSI:69.1 | Entry:$930.42 SL:$916.94 TP2:$984.38 R:R 4.0
+15:53:04 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:38.9 RSI:51.4 | Entry:$916.71 SL:$908.94 TP2:$947.82 R:R 4.0
+15:53:07 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:37.0 RSI:68.6 | Entry:$955.30 SL:$939.75 TP2:$1,017.50 R:R 4.0
+15:53:09 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:53.1 RSI:70.0 | Entry:$1,054.50 SL:$1,028.24 TP2:$1,159.54 R:R 4.0
+15:53:10 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:44.3 RSI:52.4 | Entry:$1,034.70 SL:$1,005.76 TP2:$1,150.46 R:R 4.0
+15:53:11 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:39.3 RSI:41.1 | Entry:$988.53 SL:$970.38 TP2:$1,061.12 R:R 4.0
+15:53:12 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:25.3 RSI:45.8 | Entry:$1,007.78 SL:$982.96 TP2:$1,107.09 R:R 4.0
+15:53:23 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:24.6 RSI:50.8 | Entry:$999.87 SL:$975.22 TP2:$1,098.49 R:R 4.0
+15:53:24 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:56.2 RSI:68.7 | Entry:$1,148.44 SL:$1,113.08 TP2:$1,289.88 R:R 4.0
+15:53:25 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:62.1 RSI:66.1 | Entry:$1,270.53 SL:$1,218.99 TP2:$1,476.70 R:R 4.0
+15:53:26 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:34.4 RSI:31.0 | Entry:$1,116.51 SL:$1,038.71 TP2:$1,427.73 R:R 4.0
+15:53:50 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:23.6 RSI:55.4 | Entry:$1,127.84 SL:$1,096.75 TP2:$1,252.18 R:R 4.0
+15:53:56 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:57.3 RSI:31.9 | Entry:$954.35 
+SL:$998.49 TP2:$777.81 R:R 4.0
+15:54:04 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:22.3 RSI:56.7 | Entry:$1,008.62 SL:$1,037.75 TP2:$892.08 R:R 4.0
+15:54:05 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:31.3 RSI:38.3 | Entry:$919.12 
+SL:$949.95 TP2:$795.77 R:R 4.0
+15:54:06 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:39.4 RSI:41.4 | Entry:$923.12 
+SL:$949.63 TP2:$817.11 R:R 4.0
+15:54:07 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:44.5 RSI:30.1 | Entry:$830.17 
+SL:$866.59 TP2:$684.46 R:R 4.0
+15:54:08 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:29.2 RSI:52.2 | Entry:$848.31 
+SL:$862.83 TP2:$790.25 R:R 4.0
+15:54:15 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:26.9 RSI:44.6 | Entry:$848.31 
+SL:$873.77 TP2:$746.45 R:R 4.0
+15:54:16 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:23.5 RSI:60.8 | Entry:$886.88 
+SL:$908.57 TP2:$800.15 R:R 4.0
+15:54:22 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:22.0 RSI:42.6 | Entry:$849.06 
+SL:$869.59 TP2:$766.93 R:R 4.0
+15:54:24 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:23.9 RSI:41.9 | Entry:$834.60 
+SL:$848.86 TP2:$777.57 R:R 4.0
+15:54:25 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:23.4 RSI:64.4 | Entry:$849.06 
+SL:$862.58 TP2:$794.96 R:R 4.0
+15:55:04 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:51.9 RSI:68.2 | Entry:$903.90 SL:$891.64 TP2:$952.91 R:R 4.0
+15:55:06 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:30.6 RSI:44.8 | Entry:$888.90 SL:$873.83 TP2:$949.23 R:R 4.0
+15:55:11 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:24.7 RSI:67.5 | Entry:$933.39 SL:$915.54 TP2:$1,004.80 R:R 4.0
+15:55:17 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:28.6 RSI:31.9 | Entry:$914.58 SL:$899.53 TP2:$974.77 R:R 4.0
+15:55:34 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:31.4 RSI:32.6 | Entry:$868.01 
+SL:$880.42 TP2:$818.37 R:R 4.0
+15:55:40 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:24.1 RSI:58.0 | Entry:$891.28 
+SL:$902.36 TP2:$846.95 R:R 4.0
+15:55:48 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:26.7 RSI:30.8 | Entry:$847.92 
+SL:$867.16 TP2:$770.96 R:R 4.0
+15:55:57 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:57.8 RSI:31.0 | Entry:$737.04 
+SL:$764.90 TP2:$625.59 R:R 4.0
+15:55:58 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:70.7 RSI:33.0 | Entry:$646.08 
+SL:$678.57 TP2:$516.08 R:R 4.0
+15:56:21 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:22.3 RSI:38.3 | Entry:$620.92 
+SL:$634.90 TP2:$565.00 R:R 4.0
+15:56:58 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:28.3 RSI:46.0 | Entry:$666.83 SL:$654.87 TP2:$714.66 R:R 4.0
+15:57:00 [INFO] technical — 🎯 Señal V2: BNBUSDT LONG | ADX:29.7 RSI:40.3 | Entry:$657.08 SL:$654.81 TP2:$666.16 R:R 4.0
+15:57:09 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:35.2 RSI:36.3 | Entry:$634.94 
+SL:$647.11 TP2:$586.28 R:R 4.0
+15:57:12 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:33.7 RSI:43.8 | Entry:$625.64 
+SL:$637.08 TP2:$579.90 R:R 4.0
+15:57:19 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:26.4 RSI:60.5 | Entry:$648.71 
+SL:$652.28 TP2:$634.46 R:R 4.0
+15:57:28 [INFO] technical — 🎯 Señal V2: BNBUSDT SHORT | ADX:29.2 RSI:33.4 | Entry:$615.01 
+SL:$626.70 TP2:$568.24 R:R 4.0
+15:57:36 [INFO] yearly_backtest — ✅ Backtest anual BNBUSDT: 60 trades | WR: 36.7% | R: +18.
+00 | Capital: $275.94 | Rating: BUENA ⭐
+15:57:36 [INFO] telegram_bot — Backtest BNBUSDT: 60 trades, +18.00R
+15:57:36 [INFO] yearly_backtest — Descargando ~2190 velas de XRPUSDT 4h (1 año ≈ 2190 velas de 4h)...
+15:57:36 [INFO] weex_client — Paginando 2190 velas de XRPUSDT 4h...
+Run time of job "MarketMonitor.monitor_market (trigger: interval[0:01:00], next run at: 2026-04-13 15:58:31 CDT)" was missed by 0:00:05.894933
+Run time of job "MarketMonitor.monitor_news (trigger: interval[0:05:00], next run at: 2026-04-13 16:01:31 CDT)" was missed by 0:01:05.895855
+15:58:10 [INFO] weex_client — Total velas descargadas: 2190 (22 requests)
+15:58:10 [INFO] yearly_backtest — Datos descargados: 2189 velas (2025-04-13 20:00:00 → 2026-04-13 12:00:00)
+15:58:15 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:31.8 RSI:43.0 | Entry:$2.38 SL:$2.31 TP2:$2.64 R:R 4.0
+15:58:16 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:34.6 RSI:35.5 | Entry:$2.36 SL:$2.30 TP2:$2.62 R:R 4.0
+15:58:17 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:22.6 RSI:54.5 | Entry:$2.38 SL:$2.31 TP2:$2.65 R:R 4.0
+15:58:25 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:44.4 RSI:40.2 | Entry:$2.18 SL:$2.25 TP2:$1.91 R:R 4.0
+15:58:25 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:28.6 RSI:57.8 | Entry:$2.23 SL:$2.28 TP2:$2.02 R:R 4.0
+15:58:29 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:25.3 RSI:35.7 | Entry:$2.15 SL:$2.23 TP2:$1.87 R:R 4.0
+15:58:29 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:25.0 RSI:54.9 | Entry:$2.22 SL:$2.27 TP2:$2.01 R:R 4.0
+15:58:30 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:34.1 RSI:32.9 | Entry:$2.07 SL:$2.13 TP2:$1.86 R:R 4.0
+15:58:30 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:37.4 RSI:62.6 | Entry:$2.15 SL:$2.19 TP2:$1.98 R:R 4.0
+15:58:37 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:28.2 RSI:54.3 | Entry:$2.26 SL:$2.20 TP2:$2.52 R:R 4.0
+15:58:38 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:23.0 RSI:60.3 | Entry:$2.26 SL:$2.21 TP2:$2.46 R:R 4.0
+15:58:38 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:65.5 RSI:59.8 | Entry:$2.68 SL:$2.55 TP2:$3.20 R:R 4.0
+15:58:39 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:57.2 RSI:64.1 | Entry:$3.43 SL:$3.25 TP2:$4.18 R:R 4.0
+15:58:41 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:37.9 RSI:41.0 | Entry:$3.28 SL:$3.14 TP2:$3.86 R:R 4.0
+15:58:56 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:24.5 RSI:59.3 | Entry:$3.19 SL:$3.00 TP2:$3.93 R:R 4.0
+15:59:04 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:31.4 RSI:39.1 | Entry:$2.89 SL:$2.98 TP2:$2.56 R:R 4.0
+15:59:05 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:31.8 RSI:61.3 | Entry:$3.04 SL:$3.11 TP2:$2.78 R:R 4.0
+15:59:09 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:23.6 RSI:45.0 | Entry:$2.79 SL:$2.86 TP2:$2.51 R:R 4.0
+15:59:28 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:31.9 RSI:66.8 | Entry:$3.08 SL:$3.02 TP2:$3.34 R:R 4.0
+15:59:29 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:28.0 RSI:46.2 | Entry:$3.04 SL:$2.98 TP2:$3.27 R:R 4.0
+15:59:30 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:24.8 RSI:41.5 | Entry:$2.99 SL:$2.94 TP2:$3.17 R:R 4.0
+15:59:33 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:33.0 RSI:59.9 | Entry:$2.98 SL:$3.02 TP2:$2.83 R:R 4.0
+15:59:35 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:28.6 RSI:34.7 | Entry:$2.77 SL:$2.85 TP2:$2.43 R:R 4.0
+15:59:36 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:22.2 RSI:62.4 | Entry:$2.90 SL:$2.97 TP2:$2.60 R:R 4.0
+15:59:44 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:35.4 RSI:59.2 | Entry:$3.01 SL:$2.93 TP2:$3.31 R:R 4.0
+15:59:51 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:23.5 RSI:33.4 | Entry:$2.78 SL:$2.84 TP2:$2.53 R:R 4.0
+15:59:58 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:42.8 RSI:35.3 | Entry:$2.37 SL:$2.48 TP2:$1.91 R:R 4.0
+16:00:19 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:31.2 RSI:50.0 | Entry:$2.51 SL:$2.61 TP2:$2.08 R:R 4.0
+16:00:30 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:27.4 RSI:55.8 | Entry:$2.39 SL:$2.43 TP2:$2.21 R:R 4.0
+16:00:41 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:29.5 RSI:40.3 | Entry:$2.27 SL:$2.36 TP2:$1.89 R:R 4.0
+16:00:43 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:50.8 RSI:34.8 | Entry:$1.96 SL:$2.07 TP2:$1.52 R:R 4.0
+16:00:44 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:36.2 RSI:57.5 | Entry:$2.07 SL:$2.15 TP2:$1.71 R:R 4.0
+16:00:48 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:33.9 RSI:62.8 | Entry:$2.19 SL:$2.27 TP2:$1.88 R:R 4.0
+16:00:53 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:29.5 RSI:33.6 | Entry:$2.02 SL:$2.08 TP2:$1.77 R:R 4.0
+16:00:59 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:24.9 RSI:55.7 | Entry:$2.18 SL:$2.23 TP2:$1.97 R:R 4.0
+16:01:00 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:33.8 RSI:37.9 | Entry:$1.90 SL:$1.95 TP2:$1.71 R:R 4.0
+16:01:04 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:25.7 RSI:32.7 | Entry:$1.81 SL:$1.88 TP2:$1.55 R:R 4.0
+16:01:06 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:22.5 RSI:44.7 | Entry:$1.85 SL:$1.89 TP2:$1.66 R:R 4.0
+16:01:25 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:37.2 RSI:45.5 | Entry:$2.16 SL:$2.08 TP2:$2.47 R:R 4.0
+16:01:26 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:25.8 RSI:41.1 | Entry:$2.10 SL:$2.05 TP2:$2.31 R:R 4.0
+16:01:28 [INFO] technical — 🎯 Señal V2: XRPUSDT LONG | ADX:22.3 RSI:54.7 | Entry:$2.15 SL:$2.09 TP2:$2.38 R:R 4.0
+16:01:37 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:30.1 RSI:30.0 | Entry:$1.93 SL:$1.98 TP2:$1.73 R:R 4.0
+16:01:56 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:29.2 RSI:32.0 | Entry:$1.76 SL:$1.82 TP2:$1.53 R:R 4.0
+16:01:59 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:48.8 RSI:35.8 | Entry:$1.66 SL:$1.74 TP2:$1.35 R:R 4.0
+16:02:09 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:50.5 RSI:50.0 | Entry:$1.48 SL:$1.59 TP2:$1.01 R:R 4.0
+16:02:33 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:22.1 RSI:41.9 | Entry:$1.40 SL:$1.45 TP2:$1.23 R:R 4.0
+16:02:35 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:23.3 RSI:38.5 | Entry:$1.40 SL:$1.44 TP2:$1.26 R:R 4.0
+16:02:36 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:24.0 RSI:58.4 | Entry:$1.43 SL:$1.47 TP2:$1.29 R:R 4.0
+16:02:39 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:22.2 RSI:51.0 | Entry:$1.38 SL:$1.42 TP2:$1.19 R:R 4.0
+16:03:43 [INFO] technical — 🎯 Señal V2: XRPUSDT SHORT | ADX:31.2 RSI:46.3 | Entry:$1.43 SL:$1.47 TP2:$1.26 R:R 4.0
+16:03:43 [INFO] yearly_backtest — ✅ Backtest anual XRPUSDT: 50 trades | WR: 32.7% | R: +3.0
+0 | Capital: $207.09 | Rating: NECESITA MEJORA 🔴

@@ -1,0 +1,6 @@
+WEEX:	
+Api Key: weex_cf662b3c48facaa03451f26bd859fa80
+Secret Key: f8e4151c692db35b5ef1f530e43e6e0bac7f03861ebbe87e509cea0942a5e3e8
+Passphrase: Davsempa1
+
+Claude: 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

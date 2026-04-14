@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Futures Bot — Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+    --border: #30363d; --text: #e6edf3; --text2: #8b949e;
+    --green: #3fb950; --red: #f85149; --yellow: #d29922;
+    --blue: #58a6ff; --purple: #bc8cff; --orange: #ffa657;
+    --accent: #1f6feb; --accent2: #388bfd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; }
+
+  /* Layout */
+  .app { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+  .sidebar { background: var(--bg2); border-right: 1px solid var(--border); padding: 0; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .main { overflow-y: auto; }
+
+  /* Sidebar */
+  .logo { padding: 20px 16px; border-bottom: 1px solid var(--border); }
+  .logo h1 { font-size: 15px; font-weight: 700; color: var(--blue); }
+  .logo span { font-size: 11px; color: var(--text2); }
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin-right: 6px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  nav { padding: 8px 0; flex: 1; }
+  .nav-section { font-size: 10px; font-weight: 600; color: var(--text2); letter-spacing: .08em; text-transform: uppercase; padding: 16px 16px 6px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; cursor: pointer; border-radius: 0; color: var(--text2); transition: all .15s; font-size: 13px; border-left: 2px solid transparent; }
+  .nav-item:hover { background: var(--bg3); color: var(--text); }
+  .nav-item.active { background: rgba(31,111,235,.15); color: var(--blue); border-left-color: var(--blue); }
+  .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
+
+  /* Páginas */
+  .page { display: none; padding: 24px; }
+  .page.active { display: block; }
+
+  /* Cards */
+  .page-header { margin-bottom: 24px; }
+  .page-header h2 { font-size: 20px; font-weight: 600; }
+  .page-header p { color: var(--text2); font-size: 13px; margin-top: 4px; }
+
+  .grid { display: grid; gap: 16px; }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .card-title { font-size: 13px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; }
+
+  /* Stat cards */
+  .stat-card { padding: 20px; }
+  .stat-label { font-size: 12px; color: var(--text2); margin-bottom: 8px; }
+  .stat-value { font-size: 28px; font-weight: 700; line-height: 1; }
+  .stat-sub { font-size: 12px; color: var(--text2); margin-top: 6px; }
+  .green { color: var(--green); } .red { color: var(--red); } .blue { color: var(--blue); } .yellow { color: var(--yellow); } .orange { color: var(--orange); }
+
+  /* Market ticker */
+  .ticker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .ticker-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .ticker-pair { font-size: 14px; font-weight: 700; }
+  .ticker-price { font-size: 22px; font-weight: 700; margin: 4px 0; }
+  .ticker-meta { display: flex; gap: 12px; font-size: 11px; color: var(--text2); }
+  .badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: rgba(63,185,80,.15); color: var(--green); }
+  .badge-red { background: rgba(248,81,73,.15); color: var(--red); }
+  .badge-yellow { background: rgba(210,153,34,.15); color: var(--yellow); }
+  .badge-blue { background: rgba(88,166,255,.15); color: var(--blue); }
+
+  /* Charts */
+  .chart-container { position: relative; width: 100%; }
+  .chart-container canvas { width: 100% !important; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid rgba(48,54,61,.5); }
+  tr:hover td { background: var(--bg3); }
+  tr:last-child td { border-bottom: none; }
+
+  /* Forms / Inputs */
+  .form-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 12px; color: var(--text2); font-weight: 600; }
+  input, select { background: var(--bg3); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 6px; font-size: 13px; outline: none; transition: border-color .15s; }
+  input:focus, select:focus { border-color: var(--blue); }
+  .btn { padding: 8px 16px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all .15s; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-secondary { background: var(--bg3); border: 1px solid var(--border); color: var(--text); }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* Signals */
+  .signal-row { display: grid; grid-template-columns: 60px 100px 80px 120px 100px 100px 100px 80px; align-items: center; padding: 10px 12px; border-bottom: 1px solid rgba(48,54,61,.5); font-size: 12px; gap: 8px; }
+  .signal-row:hover { background: var(--bg3); }
+  .signal-header { font-size: 10px; font-weight: 600; color: var(--text2); text-transform: uppercase; padding: 8px 12px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 60px 100px 80px 120px 100px 100px 100px 80px; gap: 8px; }
+  .direction-long { color: var(--green); font-weight: 700; }
+  .direction-short { color: var(--red); font-weight: 700; }
+  .status-tp2 { color: var(--green); }
+  .status-tp1 { color: var(--blue); }
+  .status-sl { color: var(--red); }
+  .status-open { color: var(--yellow); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .tab { padding: 8px 16px; cursor: pointer; font-size: 13px; color: var(--text2); border-bottom: 2px solid transparent; transition: all .15s; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+  /* Loader */
+  .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin .6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading { display: flex; align-items: center; gap: 8px; color: var(--text2); padding: 20px; }
+
+  /* Backtest result panel */
+  .bt-result { display: none; }
+  .bt-result.show { display: block; }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .metric { background: var(--bg3); border-radius: 6px; padding: 12px; }
+  .metric-label { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
+  .metric-value { font-size: 18px; font-weight: 700; }
+
+  /* Monthly bars */
+  .monthly-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 12px; }
+  .monthly-bar-name { width: 80px; color: var(--text2); }
+  .monthly-bar-track { flex: 1; background: var(--bg3); border-radius: 4px; height: 20px; overflow: hidden; position: relative; }
+  .monthly-bar-fill { height: 100%; border-radius: 4px; transition: width .4s ease; display: flex; align-items: center; padding: 0 6px; font-size: 11px; font-weight: 600; min-width: 40px; }
+  .monthly-bar-val { width: 70px; text-align: right; font-weight: 600; }
+
+  /* P&L calendar */
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+  .cal-day { padding: 6px 4px; border-radius: 4px; font-size: 10px; text-align: center; min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .cal-day.empty { background: transparent; }
+  .cal-day.positive { background: rgba(63,185,80,.2); }
+  .cal-day.negative { background: rgba(248,81,73,.2); }
+  .cal-day.neutral { background: var(--bg3); }
+  .cal-day .cal-date { font-weight: 600; font-size: 11px; }
+  .cal-day .cal-r { font-size: 10px; }
+
+  /* Live signal card */
+  .live-signal { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 10px; display: grid; grid-template-columns: 100px 1fr 1fr 1fr 100px; gap: 12px; align-items: center; }
+  .live-signal.long { border-left: 3px solid var(--green); }
+  .live-signal.short { border-left: 3px solid var(--red); }
+
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .grid-4, .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ─── Sidebar ─────────────────────────────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="logo">
+    <h1>🤖 Futures Bot</h1>
+    <span><span class="status-dot"></span>Online — v3.0</span>
+  </div>
+  <nav>
+    <div class="nav-section">Principal</div>
+    <div class="nav-item active" onclick="showPage('overview')">
+      <span class="icon">📊</span> Overview
+    </div>
+    <div class="nav-item" onclick="showPage('market')">
+      <span class="icon">📡</span> Mercado Live
+    </div>
+    <div class="nav-item" onclick="showPage('signals')">
+      <span class="icon">🎯</span> Señales
+    </div>
+
+    <div class="nav-section">Rendimiento</div>
+    <div class="nav-item" onclick="showPage('equity')">
+      <span class="icon">📈</span> Curva de Equity
+    </div>
+    <div class="nav-item" onclick="showPage('pnl')">
+      <span class="icon">💰</span> P&L & Capital
+    </div>
+    <div class="nav-item" onclick="showPage('monthly')">
+      <span class="icon">📆</span> Reportes
+    </div>
+
+    <div class="nav-section">Análisis</div>
+    <div class="nav-item" onclick="showPage('backtest')">
+      <span class="icon">🧪</span> Backtesting
+    </div>
+    <div class="nav-item" onclick="showPage('simulate')">
+      <span class="icon">🧮</span> Simulador
+    </div>
+    <div class="nav-section">Info</div>
+    <div class="nav-item" onclick="showPage('news')">
+      <span class="icon">📰</span> Noticias
+    </div>
+    <div class="nav-item" onclick="showPage('logs')">
+      <span class="icon">📋</span> Logs del Bot
+    </div>
+    <div class="nav-item" onclick="showPage('strategy')">
+      <span class="icon">📐</span> Estrategia
+    </div>
+  </nav>
+  <div style="padding:16px;border-top:1px solid var(--border);font-size:11px;color:var(--text2);">
+    <div id="sidebar-capital">Capital: $1,000</div>
+    <div id="sidebar-trades">Cargando...</div>
+  </div>
+</aside>
+
+<!-- ─── Main ─────────────────────────────────────────────────────────────── -->
+<main class="main">
+
+<!-- OVERVIEW -->
+<div class="page active" id="page-overview">
+  <div class="page-header">
+    <h2>📊 Overview</h2>
+    <p>Resumen general del bot — actualización cada 30s</p>
+  </div>
+
+  <div class="grid grid-4" style="margin-bottom:16px;">
+    <div class="card stat-card">
+      <div class="stat-label">💰 Capital Total</div>
+      <div class="stat-value blue" id="ov-capital">$1,000</div>
+      <div class="stat-sub" id="ov-capital-pct">+0%</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">🎯 Win Rate</div>
+      <div class="stat-value" id="ov-winrate">—</div>
+      <div class="stat-sub" id="ov-total-trades">0 trades</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">📐 Total R</div>
+      <div class="stat-value" id="ov-total-r">0R</div>
+      <div class="stat-sub" id="ov-pf">PF: —</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">🔴 Señales abiertas</div>
+      <div class="stat-value yellow" id="ov-open">0</div>
+      <div class="stat-sub">En seguimiento activo</div>
+    </div>
+  </div>
+
+  <div class="grid grid-2" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Curva de Equity (rápida)</div>
+        <span class="badge badge-blue" id="ov-eq-badge">1% riesgo</span>
+      </div>
+      <div class="chart-container" style="height:180px;">
+        <canvas id="overviewEquityChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Distribución de resultados</div>
+      </div>
+      <div class="chart-container" style="height:180px;">
+        <canvas id="overviewResultChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Señales abiertas en vivo -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">🎯 Señales abiertas — P&L en vivo</div>
+      <span id="live-badge" class="badge badge-yellow">Actualizando...</span>
+    </div>
+    <div id="live-signals-container">
+      <div class="loading"><div class="spinner"></div> Conectando WebSocket...</div>
+    </div>
+  </div>
+</div>
+
+<!-- MARKET -->
+<div class="page" id="page-market">
+  <div class="page-header">
+    <h2>📡 Mercado Live</h2>
+    <p>Datos en tiempo real — WebSocket activo</p>
+  </div>
+  <div class="ticker-grid" id="ticker-container">
+    <div class="loading"><div class="spinner"></div> Cargando...</div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Funding Rates</div></div>
+    <div id="funding-container" class="chart-container" style="height:200px;">
+      <canvas id="fundingChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNALS -->
+<div class="page" id="page-signals">
+  <div class="page-header">
+    <h2>🎯 Señales</h2>
+    <p>Historial completo de señales generadas</p>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="filterSignals('ALL', this)">Todas</div>
+    <div class="tab" onclick="filterSignals('OPEN', this)">Abiertas</div>
+    <div class="tab" onclick="filterSignals('TP2', this)">TP2 ✅</div>
+    <div class="tab" onclick="filterSignals('TP1', this)">TP1</div>
+    <div class="tab" onclick="filterSignals('SL', this)">SL ❌</div>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <div class="signal-header">
+      <span>#</span><span>Par</span><span>Dir.</span><span>Entrada</span>
+      <span>SL</span><span>TP1</span><span>TP2</span><span>Estado</span>
+    </div>
+    <div id="signals-table">
+      <div class="loading"><div class="spinner"></div> Cargando...</div>
+    </div>
+  </div>
+</div>
+
+<!-- EQUITY -->
+<div class="page" id="page-equity">
+  <div class="page-header">
+    <h2>📈 Curva de Equity</h2>
+    <p>Evolución del capital con los trades reales del bot</p>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Capital inicial ($)</label>
+      <input type="number" id="eq-capital" value="1000" min="100" style="width:140px;">
+    </div>
+    <div class="form-group">
+      <label>Riesgo por trade (%)</label>
+      <input type="number" id="eq-risk" value="1" min="0.1" max="5" step="0.1" style="width:100px;">
+    </div>
+    <button class="btn btn-primary" onclick="loadEquity()">Actualizar</button>
+  </div>
+
+  <div class="grid grid-4" style="margin-bottom:16px;" id="eq-stats">
+    <div class="card stat-card">
+      <div class="stat-label">Capital Final</div>
+      <div class="stat-value green" id="eq-final">—</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">P&L Total</div>
+      <div class="stat-value" id="eq-pnl">—</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">Pico Máximo</div>
+      <div class="stat-value blue" id="eq-peak">—</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-label">Max Drawdown</div>
+      <div class="stat-value red" id="eq-dd">—</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">Curva de Equity</div></div>
+    <div class="chart-container" style="height:300px;"><canvas id="equityChart"></canvas></div>
+  </div>
+  <br>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Drawdown (%)</div></div>
+    <div class="chart-container" style="height:150px;"><canvas id="drawdownChart"></canvas></div>
+  </div>
+</div>
+
+<!-- P&L -->
+<div class="page" id="page-pnl">
+  <div class="page-header">
+    <h2>💰 P&L & Capital</h2>
+    <p>Seguimiento diario de pérdidas y ganancias</p>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Capital de referencia ($)</label>
+      <input type="number" id="pnl-capital" value="1000" min="100" style="width:140px;">
+    </div>
+    <div class="form-group">
+      <label>Período (días)</label>
+      <input type="number" id="pnl-days" value="30" min="7" max="365" style="width:100px;">
+    </div>
+    <button class="btn btn-primary" onclick="loadPnL()">Actualizar</button>
+  </div>
+
+  <div class="grid grid-2" style="margin-bottom:16px;">
+    <div class="card">
+      <div class="card-header"><div class="card-title">P&L Diario (barras)</div></div>
+      <div class="chart-container" style="height:220px;"><canvas id="dailyPnLChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Capital acumulado (diario)</div></div>
+      <div class="chart-container" style="height:220px;"><canvas id="dailyCapitalChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">📆 Calendario de P&L</div></div>
+    <div style="padding:4px 0 8px;color:var(--text2);font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+    </div>
+    <div class="cal-grid" id="pnl-calendar"></div>
+  </div>
+</div>
+
+<!-- MONTHLY REPORTS -->
+<div class="page" id="page-monthly">
+  <div class="page-header">
+    <h2>📆 Reportes Mensuales</h2>
+    <p>Desglose mes a mes con capital compuesto</p>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Capital inicial ($)</label>
+      <input type="number" id="mo-capital" value="1000" min="100" style="width:140px;">
+    </div>
+    <div class="form-group">
+      <label>Meses a mostrar</label>
+      <input type="number" id="mo-months" value="12" min="1" max="24" style="width:100px;">
+    </div>
+    <button class="btn btn-primary" onclick="loadMonthly()">Actualizar</button>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-header"><div class="card-title">P&L Mensual (R)</div></div>
+    <div class="chart-container" style="height:220px;"><canvas id="monthlyChart"></canvas></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">Desglose por mes</div></div>
+    <div id="monthly-bars"></div>
+  </div>
+</div>
+
+<!-- BACKTEST -->
+<div class="page" id="page-backtest">
+  <div class="page-header">
+    <h2>🧪 Backtesting</h2>
+    <p>Simula la estrategia sobre datos históricos</p>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-header"><div class="card-title">Configuración</div></div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Par</label>
+        <select id="bt-pair" style="width:140px;">
+          <option value="BTCUSDT">BTCUSDT</option>
+          <option value="ETHUSDT">ETHUSDT</option>
+          <option value="SOLUSDT">SOLUSDT</option>
+          <option value="BNBUSDT">BNBUSDT</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Timeframe</label>
+        <select id="bt-tf" style="width:100px;">
+          <option value="15m">15m</option>
+          <option value="1h" selected>1H</option>
+          <option value="4h">4H</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Capital ($)</label>
+        <input type="number" id="bt-capital" value="1000" style="width:130px;">
+      </div>
+      <div class="form-group">
+        <label>Riesgo (%)</label>
+        <input type="number" id="bt-risk" value="1" step="0.1" style="width:90px;">
+      </div>
+      <div class="form-group">
+        <label>Tipo</label>
+        <select id="bt-type" style="width:130px;">
+          <option value="fast">500 velas</option>
+          <option value="yearly">Anual (~1500v)</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="bt-run-btn" onclick="runBacktest()">▶ Ejecutar</button>
+    </div>
+  </div>
+
+  <div id="bt-loading" style="display:none;" class="loading"><div class="spinner"></div> Ejecutando backtest... puede tardar 1-2 minutos</div>
+
+  <div id="bt-result" class="bt-result">
+    <div class="metric-grid" style="margin-bottom:16px;" id="bt-metrics"></div>
+    <div class="grid grid-2" style="margin-bottom:16px;">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Curva de Equity del Backtest</div></div>
+        <div class="chart-container" style="height:250px;"><canvas id="btEquityChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">P&L Mensual del Backtest</div></div>
+        <div class="chart-container" style="height:250px;"><canvas id="btMonthlyChart"></canvas></div>
+      </div>
+    </div>
+    <div class="card" id="bt-monthly-table"></div>
+  </div>
+</div>
+
+<!-- SIMULATE -->
+<div class="page" id="page-simulate">
+  <div class="page-header">
+    <h2>🧮 Simulador de Capital</h2>
+    <p>¿Cuánto habrías ganado/perdido con tu capital real?</p>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-header"><div class="card-title">Parámetros</div></div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Tu capital ($)</label>
+        <input type="number" id="sim-capital" value="5000" min="100">
+      </div>
+      <div class="form-group">
+        <label>Riesgo por trade (%)</label>
+        <input type="number" id="sim-risk" value="1" min="0.1" max="10" step="0.1">
+      </div>
+      <div class="form-group">
+        <label>Desde (opcional)</label>
+        <input type="date" id="sim-from">
+      </div>
+      <div class="form-group">
+        <label>Hasta (opcional)</label>
+        <input type="date" id="sim-to">
+      </div>
+      <button class="btn btn-primary" onclick="runSimulation()">🧮 Simular</button>
+    </div>
+  </div>
+
+  <div id="sim-result" style="display:none;">
+    <div class="grid grid-4" style="margin-bottom:16px;" id="sim-stats"></div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Curva de Capital Simulado</div></div>
+      <div class="chart-container" style="height:300px;"><canvas id="simChart"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS -->
+<div class="page" id="page-news">
+  <div class="page-header">
+    <h2>📰 Noticias Analizadas</h2>
+    <p>Noticias de alto impacto procesadas por IA</p>
+  </div>
+  <div id="news-container">
+    <div class="loading"><div class="spinner"></div> Cargando noticias...</div>
+  </div>
+</div>
+
+<!-- LOGS -->
+<div class="page" id="page-logs">
+  <div class="page-header">
+    <h2>📋 Logs del Bot</h2>
+    <p>Monitoreo en tiempo real del estado del bot</p>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Nivel</label>
+      <select id="log-level" style="width:120px;">
+        <option value="ALL">Todo</option>
+        <option value="ERROR">Solo errores</option>
+        <option value="WARNING">Warnings</option>
+        <option value="INFO">Info</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Líneas</label>
+      <input type="number" id="log-lines" value="100" min="20" max="500" style="width:90px;">
+    </div>
+    <button class="btn btn-primary" onclick="loadLogs()">🔄 Actualizar</button>
+    <button class="btn btn-secondary" onclick="setInterval(loadLogs, 10000)">▶ Auto (10s)</button>
+  </div>
+  <!-- Resumen -->
+  <div id="log-summary" class="card" style="margin-bottom:16px;display:none;">
+    <div class="card-header"><div class="card-title">Resumen</div></div>
+    <div id="log-summary-content"></div>
+  </div>
+  <!-- Log output -->
+  <div class="card" style="padding:0;overflow:hidden;">
+    <div style="background:var(--bg);padding:12px;font-family:monospace;font-size:11px;
+                max-height:500px;overflow-y:auto;white-space:pre-wrap;line-height:1.6;"
+         id="log-output">Clic en "Actualizar" para cargar el log...</div>
+  </div>
+</div>
+
+<!-- STRATEGY -->
+<div class="page" id="page-strategy">
+  <div class="page-header">
+    <h2>📐 Estrategia Activa</h2>
+    <p>Configuración y lógica de la estrategia V2</p>
+  </div>
+  <div id="strategy-container">
+    <div class="loading"><div class="spinner"></div> Cargando...</div>
+  </div>
+</div>
+</div>
+
+<script>
+// ─── Estado global ─────────────────────────────────────────────────────────
+const API = '';
+let charts = {};
+let wsConn = null;
+let simChartInst = null;
+
+// ─── Navegación ────────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id)?.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick')?.includes(`'${id}'`)) n.classList.add('active');
+  });
+  // Cargar datos de la página
+  const loaders = {
+    overview: loadOverview,
+    market: () => {},
+    signals: () => loadSignals('ALL'),
+    equity: loadEquity,
+    pnl: loadPnL,
+    monthly: loadMonthly,
+    news: loadNews,
+  };
+  if (loaders[id]) loaders[id]();
+}
+
+// ─── Helpers ───────────────────────────────────────────────────────────────
+function fmt(n, d=2) { return Number(n).toFixed(d); }
+function fmtUSD(n) { return '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function fmtPct(n) { const v = fmt(n); return (n>=0?'+':'')+v+'%'; }
+function colorVal(v) { return v >= 0 ? 'var(--green)' : 'var(--red)'; }
+function pnlBadge(v) {
+  const cls = v > 0 ? 'badge-green' : v < 0 ? 'badge-red' : 'badge-yellow';
+  return `<span class="badge ${cls}">${fmtPct(v)}</span>`;
+}
+
+function destroyChart(id) {
+  if (charts[id]) { charts[id].destroy(); delete charts[id]; }
+}
+
+const CHART_DEFAULTS = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
+  scales: {
+    x: { grid: { color: '#21262d' }, ticks: { color: '#8b949e', maxTicksLimit: 8, font:{size:10} } },
+    y: { grid: { color: '#21262d' }, ticks: { color: '#8b949e', font:{size:10} } }
+  }
+};
+
+function makeLineChart(id, labels, data, color='#58a6ff', fill=true, label='') {
+  destroyChart(id);
+  const ctx = document.getElementById(id)?.getContext('2d');
+  if (!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: label || id,
+        data,
+        borderColor: color,
+        backgroundColor: fill ? color + '18' : 'transparent',
+        fill,
+        tension: 0.3,
+        pointRadius: data.length > 100 ? 0 : 2,
+        borderWidth: 2,
+      }]
+    },
+    options: { ...CHART_DEFAULTS }
+  });
+}
+
+function makeBarChart(id, labels, data, colors) {
+  destroyChart(id);
+  const ctx = document.getElementById(id)?.getContext('2d');
+  if (!ctx) return;
+  charts[id] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: colors || data.map(v => v >= 0 ? '#3fb95040' : '#f8514940'),
+        borderColor: colors || data.map(v => v >= 0 ? '#3fb950' : '#f85149'),
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      ...CHART_DEFAULTS,
+      plugins: { ...CHART_DEFAULTS.plugins, legend: { display: false } }
+    }
+  });
+}
+
+// ─── Overview ──────────────────────────────────────────────────────────────
+async function loadOverview() {
+  try {
+    const [stats, eq] = await Promise.all([
+      fetch('/api/stats').then(r=>r.json()),
+      fetch('/api/equity?capital=1000&risk_pct=1').then(r=>r.json()),
+    ]);
+
+    document.getElementById('ov-capital').textContent = fmtUSD(eq.final_capital);
+    document.getElementById('ov-capital').style.color = colorVal(eq.total_profit_usd);
+    document.getElementById('ov-capital-pct').textContent = fmtPct(eq.total_profit_pct) + ' de $1,000';
+    document.getElementById('ov-winrate').textContent = (stats.win_rate||0) + '%';
+    document.getElementById('ov-winrate').style.color = stats.win_rate >= 50 ? 'var(--green)' : 'var(--red)';
+    document.getElementById('ov-total-trades').textContent = (stats.total_closed||0) + ' trades cerrados';
+    document.getElementById('ov-total-r').textContent = (eq.total_profit_usd >= 0 ? '+' : '') + fmt(stats.total_r||0) + 'R';
+    document.getElementById('ov-total-r').style.color = colorVal(stats.total_r||0);
+    document.getElementById('ov-open').textContent = stats.open_signals || 0;
+
+    // Sidebar
+    document.getElementById('sidebar-capital').textContent = 'Capital: ' + fmtUSD(eq.final_capital);
+    document.getElementById('sidebar-trades').textContent = (stats.total_closed||0) + ' trades | WR ' + (stats.win_rate||0) + '%';
+
+    // Mini equity chart
+    const step = Math.max(1, Math.floor(eq.labels.length / 40));
+    makeLineChart('overviewEquityChart',
+      eq.labels.filter((_,i)=>i%step===0),
+      eq.equity.filter((_,i)=>i%step===0),
+      eq.total_profit_usd >= 0 ? '#3fb950' : '#f85149',
+      true, 'Capital'
+    );
+
+    // Donut de resultados
+    destroyChart('overviewResultChart');
+    const ctx = document.getElementById('overviewResultChart')?.getContext('2d');
+    if (ctx) {
+      charts['overviewResultChart'] = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['TP2 🏆', 'TP1 ✅', 'SL ❌'],
+          datasets: [{
+            data: [stats.tp2_hit||0, stats.tp1_hit||0, stats.sl_hit||0],
+            backgroundColor: ['#3fb950', '#58a6ff', '#f85149'],
+            borderWidth: 0,
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '70%',
+          plugins: {
+            legend: { display: true, position: 'right', labels: { color: '#8b949e', font:{size:11} } }
+          }
+        }
+      });
+    }
+  } catch(e) { console.error('Overview error:', e); }
+}
+
+// ─── WebSocket Live ─────────────────────────────────────────────────────────
+function connectWS() {
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  wsConn = new WebSocket(`${proto}//${location.host}/ws/live`);
+
+  wsConn.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+    if (msg.type === 'market_update') {
+      updateMarketTickers(msg.market);
+      updateLiveSignals(msg.open_signals);
+      document.getElementById('live-badge').textContent = '🟢 Live — ' + new Date().toLocaleTimeString();
+    }
+  };
+  wsConn.onclose = () => {
+    document.getElementById('live-badge').textContent = '🔴 Desconectado — reconectando...';
+    setTimeout(connectWS, 5000);
+  };
+}
+
+function updateMarketTickers(market) {
+  const container = document.getElementById('ticker-container');
+  if (!market?.length) return;
+  container.innerHTML = market.map(d => {
+    const chgClass = d.price_change_24h >= 0 ? 'green' : 'red';
+    const fundingClass = Math.abs(d.funding_rate) > 0.05 ? 'red' : Math.abs(d.funding_rate) > 0.02 ? 'yellow' : 'green';
+    return `
+      <div class="ticker-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="ticker-pair">${d.pair.replace('USDT','')}/USDT</span>
+          ${pnlBadge(d.price_change_24h)}
+        </div>
+        <div class="ticker-price ${chgClass}">${fmtUSD(d.price)}</div>
+        <div class="ticker-meta">
+          <span>FR: <b class="${fundingClass}">${d.funding_rate >= 0?'+':''}${fmt(d.funding_rate,4)}%</b></span>
+          <span>OI: <b>${d.oi_change_1h >= 0?'+':''}${fmt(d.oi_change_1h,1)}%</b></span>
+          <span>Vol: $${(d.volume_24h/1e6).toFixed(0)}M</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function updateLiveSignals(signals) {
+  const c = document.getElementById('live-signals-container');
+  if (!signals?.length) {
+    c.innerHTML = '<div style="padding:20px;color:var(--text2);text-align:center;">Sin señales abiertas actualmente</div>';
+    return;
+  }
+  c.innerHTML = signals.map(s => {
+    const dir = s.direction === 'LONG' ? 'long' : 'short';
+    const pnl = s.live_pnl_r || 0;
+    const pnlPct = s.live_pnl_pct || 0;
+    return `
+      <div class="live-signal ${dir}">
+        <div>
+          <div style="font-weight:700;">${s.pair.replace('USDT','')}/USDT</div>
+          <div class="direction-${dir}">${s.direction}</div>
+          <div style="font-size:11px;color:var(--text2);">#${String(s.id).padStart(4,'0')}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--text2);">Entrada</div>
+          <div style="font-weight:600;">${fmtUSD(s.entry_low)} — ${fmtUSD(s.entry_high)}</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--text2);">SL / TP1 / TP2</div>
+          <div style="font-size:12px;"><span style="color:var(--red);">${fmtUSD(s.stop_loss)}</span> / <span style="color:var(--blue);">${fmtUSD(s.tp1)}</span> / <span style="color:var(--green);">${fmtUSD(s.tp2)}</span></div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--text2);">Precio actual</div>
+          <div style="font-weight:700;">${s.live_price ? fmtUSD(s.live_price) : '—'}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:18px;font-weight:700;color:${colorVal(pnl)}">${pnl>=0?'+':''}${fmt(pnl,2)}R</div>
+          <div style="font-size:12px;color:${colorVal(pnl)}">${fmtPct(pnlPct)}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ─── Signals table ─────────────────────────────────────────────────────────
+async function loadSignals(status = 'ALL') {
+  const container = document.getElementById('signals-table');
+  container.innerHTML = '<div class="loading"><div class="spinner"></div> Cargando...</div>';
+  try {
+    const data = await fetch(`/api/signals?limit=100&status=${status}`).then(r=>r.json());
+    if (!data.signals.length) {
+      container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text2);">Sin señales</div>';
+      return;
+    }
+    container.innerHTML = data.signals.map(s => {
+      const statMap = { TP2:'status-tp2', TP1:'status-tp1', SL:'status-sl', OPEN:'status-open' };
+      const cls = statMap[s.status] || '';
+      const pnlTxt = s.pnl_r ? `${s.pnl_r >= 0 ? '+' : ''}${fmt(s.pnl_r,2)}R` : '—';
+      return `
+        <div class="signal-row">
+          <span style="color:var(--text2);">#${String(s.id).padStart(4,'0')}</span>
+          <span style="font-weight:600;">${s.pair}</span>
+          <span class="direction-${s.direction?.toLowerCase()}">${s.direction}</span>
+          <span style="font-size:11px;">${fmtUSD(s.entry_low)}—${fmtUSD(s.entry_high)}</span>
+          <span style="color:var(--red);font-size:11px;">${fmtUSD(s.stop_loss)}</span>
+          <span style="color:var(--blue);font-size:11px;">${fmtUSD(s.tp1)}</span>
+          <span style="color:var(--green);font-size:11px;">${fmtUSD(s.tp2)}</span>
+          <span class="${cls}" style="font-weight:600;">${s.status} <small style="color:var(--text2);">${pnlTxt}</small></span>
+        </div>`;
+    }).join('');
+  } catch(e) { container.innerHTML = '<div style="padding:20px;color:var(--red);">Error cargando señales</div>'; }
+}
+
+function filterSignals(status, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  loadSignals(status);
+}
+
+// ─── Equity ────────────────────────────────────────────────────────────────
+async function loadEquity() {
+  const capital = document.getElementById('eq-capital')?.value || 1000;
+  const risk = document.getElementById('eq-risk')?.value || 1;
+  try {
+    const eq = await fetch(`/api/equity?capital=${capital}&risk_pct=${risk}`).then(r=>r.json());
+    document.getElementById('eq-final').textContent = fmtUSD(eq.final_capital);
+    document.getElementById('eq-final').style.color = colorVal(eq.total_profit_usd);
+    const pnlSign = eq.total_profit_usd >= 0 ? '+' : '';
+    document.getElementById('eq-pnl').textContent = pnlSign + fmtUSD(Math.abs(eq.total_profit_usd)) + ' (' + fmtPct(eq.total_profit_pct) + ')';
+    document.getElementById('eq-pnl').style.color = colorVal(eq.total_profit_usd);
+    document.getElementById('eq-peak').textContent = fmtUSD(eq.peak_capital);
+    document.getElementById('eq-dd').textContent = '-' + fmt(eq.max_drawdown_pct, 1) + '%';
+
+    const step = Math.max(1, Math.floor(eq.labels.length / 60));
+    const lbls = eq.labels.filter((_,i)=>i%step===0);
+    const eqD = eq.equity.filter((_,i)=>i%step===0);
+    const ddD = eq.drawdown.filter((_,i)=>i%step===0);
+
+    makeLineChart('equityChart', lbls, eqD,
+      eq.total_profit_usd >= 0 ? '#3fb950' : '#f85149', true, 'Capital ($)');
+    makeLineChart('drawdownChart', lbls, ddD, '#f85149', true, 'Drawdown (%)');
+  } catch(e) { console.error(e); }
+}
+
+// ─── P&L ───────────────────────────────────────────────────────────────────
+async function loadPnL() {
+  const capital = document.getElementById('pnl-capital')?.value || 1000;
+  const days = document.getElementById('pnl-days')?.value || 30;
+  try {
+    const data = await fetch(`/api/pnl/daily?capital=${capital}&days=${days}`).then(r=>r.json());
+    const d = data.days || [];
+    const labels = d.map(x => x.date.slice(5));
+    const rVals = d.map(x => x.total_r);
+    const capVals = d.map(x => x.capital_end);
+
+    makeBarChart('dailyPnLChart', labels, rVals);
+    makeLineChart('dailyCapitalChart', labels, capVals,
+      data.capital_final >= data.capital_initial ? '#3fb950' : '#f85149', true, 'Capital ($)');
+
+    // Calendario
+    buildCalendar(d);
+  } catch(e) { console.error(e); }
+}
+
+function buildCalendar(days) {
+  const cal = document.getElementById('pnl-calendar');
+  if (!cal) return;
+  const byDate = {};
+  days.forEach(d => byDate[d.date] = d);
+
+  if (!days.length) { cal.innerHTML = '<div style="color:var(--text2);padding:10px;">Sin datos</div>'; return; }
+
+  const first = new Date(days[0].date);
+  const startOffset = first.getDay();
+
+  let html = '<div class="cal-day empty"></div>'.repeat(startOffset);
+  days.forEach(d => {
+    const cls = d.total_r > 0 ? 'positive' : d.total_r < 0 ? 'negative' : 'neutral';
+    const sign = d.total_r >= 0 ? '+' : '';
+    const day = d.date.slice(8);
+    html += `<div class="cal-day ${cls}"><div class="cal-date">${day}</div><div class="cal-r" style="color:${d.total_r>=0?'var(--green)':'var(--red)'}">${sign}${fmt(d.total_r,2)}R</div></div>`;
+  });
+  cal.innerHTML = html;
+}
+
+// ─── Monthly ───────────────────────────────────────────────────────────────
+async function loadMonthly() {
+  const capital = document.getElementById('mo-capital')?.value || 1000;
+  const months = document.getElementById('mo-months')?.value || 12;
+  try {
+    const data = await fetch(`/api/pnl/monthly?capital=${capital}&months=${months}`).then(r=>r.json());
+    const ms = data.months || [];
+    const labels = ms.map(m => m.month_name?.slice(0,3) + ' ' + m.month?.slice(0,4) || m.month);
+    const rVals = ms.map(m => m.total_r);
+    makeBarChart('monthlyChart', labels, rVals);
+
+    const maxAbs = Math.max(...ms.map(m => Math.abs(m.pnl_usd)), 1);
+    const bars = document.getElementById('monthly-bars');
+    bars.innerHTML = ms.map(m => {
+      const pct = Math.min(100, Math.abs(m.pnl_usd) / maxAbs * 100);
+      const color = m.total_r >= 0 ? '#3fb950' : '#f85149';
+      const sign = m.pnl_usd >= 0 ? '+' : '';
+      return `
+        <div class="monthly-bar">
+          <div class="monthly-bar-name">${m.month_name}</div>
+          <div class="monthly-bar-track">
+            <div class="monthly-bar-fill" style="width:${pct}%;background:${color}20;border-left:3px solid ${color};color:${color};">
+              ${m.trades} trades | WR ${m.win_rate}%
+            </div>
+          </div>
+          <div class="monthly-bar-val" style="color:${color};">${sign}${fmtUSD(m.pnl_usd)}</div>
+        </div>`;
+    }).join('');
+  } catch(e) { console.error(e); }
+}
+
+// ─── Backtest ───────────────────────────────────────────────────────────────
+async function runBacktest() {
+  const btn = document.getElementById('bt-run-btn');
+  const loading = document.getElementById('bt-loading');
+  const result = document.getElementById('bt-result');
+  btn.disabled = true;
+  loading.style.display = 'flex';
+  result.classList.remove('show');
+
+  try {
+    const body = {
+      pair: document.getElementById('bt-pair').value,
+      timeframe: document.getElementById('bt-tf').value,
+      capital: parseFloat(document.getElementById('bt-capital').value),
+      risk_pct: parseFloat(document.getElementById('bt-risk').value),
+      yearly: document.getElementById('bt-type').value === 'yearly',
+    };
+
+    const data = await fetch('/api/backtest', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(body),
+    }).then(r=>r.json());
+
+    // Metrics
+    const gainColor = data.total_profit_usd >= 0 ? 'green' : 'red';
+    const metrics = [
+      { label: '🎯 Win Rate', value: data.win_rate + '%', color: data.win_rate >= 50 ? 'green' : 'red' },
+      { label: '📐 Total R', value: (data.total_r >= 0 ? '+' : '') + fmt(data.total_r) + 'R', color: data.total_r >= 0 ? 'green' : 'red' },
+      { label: '⚖️ Profit Factor', value: data.profit_factor, color: data.profit_factor >= 1.5 ? 'green' : 'yellow' },
+      { label: '💡 EV/trade', value: (data.expected_value >= 0 ? '+' : '') + fmt(data.expected_value, 3) + 'R', color: data.expected_value >= 0 ? 'green' : 'red' },
+      { label: '📉 Max Drawdown', value: fmt(data.max_drawdown_pct, 1) + '%', color: 'red' },
+      { label: '📊 Sharpe', value: data.sharpe_ratio, color: data.sharpe_ratio > 1 ? 'green' : 'yellow' },
+      { label: '💰 Capital Final', value: fmtUSD(data.final_capital), color: gainColor },
+      { label: '📈 P&L', value: (data.total_profit_usd >= 0 ? '+' : '') + fmtUSD(data.total_profit_usd) + ' (' + fmtPct(data.total_profit_pct) + ')', color: gainColor },
+    ];
+
+    document.getElementById('bt-metrics').innerHTML = metrics.map(m =>
+      `<div class="metric"><div class="metric-label">${m.label}</div><div class="metric-value ${m.color}">${m.value}</div></div>`
+    ).join('');
+
+    // Equity chart
+    if (data.equity_curve?.length) {
+      const step = Math.max(1, Math.floor(data.equity_curve.length / 60));
+      const eqLabels = data.equity_curve.filter((_,i)=>i%step===0).map((_,i)=>i+'');
+      const eqData = data.equity_curve.filter((_,i)=>i%step===0);
+      makeLineChart('btEquityChart', eqLabels, eqData, data.total_profit_usd >= 0 ? '#3fb950' : '#f85149', true, 'Capital');
+    }
+
+    // Monthly chart
+    if (data.monthly_results?.length) {
+      const mLabels = data.monthly_results.map(m => m.month);
+      const mVals = data.monthly_results.map(m => m.total_r);
+      makeBarChart('btMonthlyChart', mLabels, mVals);
+
+      const monthTable = document.getElementById('bt-monthly-table');
+      monthTable.innerHTML = `
+        <div class="card-header"><div class="card-title">Desglose mensual del backtest</div></div>
+        <table><thead><tr><th>Mes</th><th>Trades</th><th>WR%</th><th>Total R</th><th>P&L USD</th><th>P&L%</th></tr></thead>
+        <tbody>${data.monthly_results.map(m => `
+          <tr>
+            <td>${m.month}</td>
+            <td>${m.trades}</td>
+            <td style="color:${m.win_rate>=50?'var(--green)':'var(--red)'};">${m.win_rate}%</td>
+            <td style="color:${m.total_r>=0?'var(--green)':'var(--red)'};">${m.total_r>=0?'+':''}${fmt(m.total_r,2)}R</td>
+            <td style="color:${m.pnl_usd>=0?'var(--green)':'var(--red)'};">${m.pnl_usd>=0?'+':''}${fmtUSD(m.pnl_usd)}</td>
+            <td style="color:${m.pnl_pct>=0?'var(--green)':'var(--red)'};">${fmtPct(m.pnl_pct)}</td>
+          </tr>`).join('')}
+        </tbody></table>`;
+    }
+
+    result.classList.add('show');
+  } catch(e) {
+    console.error(e);
+    alert('Error ejecutando backtest: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    loading.style.display = 'none';
+  }
+}
+
+// ─── Simulador ──────────────────────────────────────────────────────────────
+async function runSimulation() {
+  const body = {
+    capital: parseFloat(document.getElementById('sim-capital').value),
+    risk_pct: parseFloat(document.getElementById('sim-risk').value),
+    from_date: document.getElementById('sim-from').value || null,
+    to_date: document.getElementById('sim-to').value || null,
+  };
+
+  const resultDiv = document.getElementById('sim-result');
+  resultDiv.style.display = 'none';
+
+  try {
+    const data = await fetch('/api/simulate', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(body),
+    }).then(r=>r.json());
+
+    if (data.error) { alert(data.error); return; }
+
+    const gainColor = data.ganancia_usd >= 0 ? 'var(--green)' : 'var(--red)';
+    document.getElementById('sim-stats').innerHTML = [
+      { label: data.ganancia_usd >= 0 ? '📈 GANANCIA' : '📉 PÉRDIDA', value: fmtUSD(Math.abs(data.ganancia_usd)), color: gainColor },
+      { label: 'Retorno %', value: fmtPct(data.ganancia_pct), color: gainColor },
+      { label: 'Capital Final', value: fmtUSD(data.capital_final), color: gainColor },
+      { label: 'Max Drawdown', value: fmtUSD(data.max_drawdown_usd) + ' (' + fmt(data.max_drawdown_pct,1) + '%)', color: 'var(--red)' },
+      { label: 'Trades', value: data.total_trades, color: 'var(--text)' },
+      { label: 'Win Rate', value: data.win_rate + '%', color: data.win_rate >= 50 ? 'var(--green)' : 'var(--red)' },
+      { label: 'Total R', value: (data.total_r >= 0 ? '+' : '') + fmt(data.total_r, 2) + 'R', color: gainColor },
+      { label: 'Riesgo usado', value: data.risk_pct + '%/trade', color: 'var(--blue)' },
+    ].map(m => `<div class="card stat-card"><div class="stat-label">${m.label}</div><div class="stat-value" style="color:${m.color};font-size:22px;">${m.value}</div></div>`).join('');
+
+    if (data.equity_curve?.length) {
+      const step = Math.max(1, Math.floor(data.equity_curve.length / 80));
+      makeLineChart('simChart',
+        data.equity_curve.filter((_,i)=>i%step===0).map((_,i)=>i+''),
+        data.equity_curve.filter((_,i)=>i%step===0),
+        data.ganancia_usd >= 0 ? '#3fb950' : '#f85149', true, 'Capital ($)'
+      );
+    }
+    resultDiv.style.display = 'block';
+  } catch(e) { console.error(e); alert('Error en simulación: ' + e.message); }
+}
+
+// ─── Noticias ───────────────────────────────────────────────────────────────
+async function loadNews() {
+  const c = document.getElementById('news-container');
+  try {
+    const data = await fetch('/api/news?limit=30').then(r=>r.json());
+    if (!data.news?.length) {
+      c.innerHTML = '<div style="padding:20px;color:var(--text2);">Sin noticias registradas aún</div>';
+      return;
+    }
+    const sentimentColor = { BULLISH: 'var(--green)', BEARISH: 'var(--red)', NEUTRAL: 'var(--text2)' };
+    const impactColor = { HIGH: 'var(--red)', MEDIUM: 'var(--yellow)', LOW: 'var(--text2)' };
+    c.innerHTML = `<div style="display:flex;flex-direction:column;gap:10px;">${
+      data.news.map(n => `
+        <div class="card" style="padding:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+            <div style="flex:1;">
+              <div style="font-weight:600;margin-bottom:6px;">${n.title}</div>
+              ${n.ai_analysis ? `<div style="font-size:12px;color:var(--text2);">${n.ai_analysis}</div>` : ''}
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;">
+              <span class="badge" style="background:${sentimentColor[n.sentiment]}22;color:${sentimentColor[n.sentiment]};">${n.sentiment}</span>
+              <span class="badge" style="background:${impactColor[n.impact]}22;color:${impactColor[n.impact]};">${n.impact}</span>
+              <span style="font-size:10px;color:var(--text2);">${n.timestamp?.slice(0,16).replace('T',' ')}</span>
+            </div>
+          </div>
+          ${n.url ? `<a href="${n.url}" target="_blank" style="font-size:11px;color:var(--blue);margin-top:6px;display:block;">Ver noticia →</a>` : ''}
+        </div>`).join('')
+    }</div>`;
+  } catch(e) { c.innerHTML = '<div style="color:var(--red);padding:20px;">Error cargando noticias</div>'; }
+}
+
+// ─── Logs ────────────────────────────────────────────────────────────────────
+async function loadLogs() {
+  const level   = document.getElementById('log-level')?.value || 'ALL';
+  const lines   = document.getElementById('log-lines')?.value  || 100;
+  const output  = document.getElementById('log-output');
+  const summary = document.getElementById('log-summary');
+  const sumCont = document.getElementById('log-summary-content');
+
+  output.textContent = '⏳ Cargando...';
+  try {
+    const data = await fetch(`/api/log?lines=${lines}&level=${level}`).then(r=>r.json());
+
+    // Colorear líneas por nivel
+    const colored = (data.lines || []).map(l => {
+      if (l.includes('[ERROR]'))   return `<span style="color:var(--red);">${l}</span>`;
+      if (l.includes('[WARNING]')) return `<span style="color:var(--yellow);">${l}</span>`;
+      if (l.includes('[INFO]'))    return `<span style="color:var(--text2);">${l}</span>`;
+      return `<span style="color:var(--text);">${l}</span>`;
+    });
+    output.innerHTML = colored.join('\n') || 'Sin entradas en el log.';
+    // Scroll al final
+    output.scrollTop = output.scrollHeight;
+
+    // Mostrar resumen
+    if (data.summary) {
+      sumCont.innerHTML = `<pre style="font-size:11px;color:var(--text2);padding:8px;">${
+        data.summary.replace(/\*/g,'').replace(/`/g,'')
+      }</pre>`;
+      summary.style.display = 'block';
+    }
+  } catch(e) {
+    output.textContent = '❌ Error cargando log: ' + e.message;
+  }
+}
+
+// ─── Estrategia ──────────────────────────────────────────────────────────────
+async function loadStrategy() {
+  const c = document.getElementById('strategy-container');
+  try {
+    const d = await fetch('/api/strategy').then(r=>r.json());
+    c.innerHTML = `
+      <div class="grid grid-2" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="card-header"><div class="card-title">Estrategia Activa</div></div>
+          <div style="padding:4px 0;">
+            <div style="font-size:18px;font-weight:700;color:var(--blue);margin-bottom:12px;">${d.version}</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              ${d.pairs.map(p=>`<span class="badge badge-blue">${p}</span>`).join('')}
+            </div>
+            <div style="margin-top:12px;font-size:13px;color:var(--text2);">
+              Riesgo/trade: <b style="color:var(--text);">${d.risk_per_trade}%</b> &nbsp;|&nbsp;
+              R:R mínimo: <b style="color:var(--green);">1:${d.min_rr}</b> &nbsp;|&nbsp;
+              Modo: <b style="color:${d.paper_trading?'var(--yellow)':'var(--green)'};">${d.paper_trading?'PAPER':'LIVE'}</b>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Gestión de la operación</div></div>
+          <div style="font-size:13px;line-height:2;">
+            <div>📍 <b>Entrada:</b> ${d.entry}</div>
+            <div>🛑 <b>Stop Loss:</b> ${d.stop_loss}</div>
+            <div>🎯 <b>TP1:</b> ${d.tp1}</div>
+            <div>🏆 <b>TP2:</b> ${d.tp2}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Filtros Requeridos (todos deben cumplirse)</div></div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:4px 0;">
+          ${d.filters.map(f=>`
+            <div style="background:var(--bg3);border-radius:6px;padding:12px;">
+              <div style="font-weight:700;color:var(--green);margin-bottom:4px;">✅ ${f.name}</div>
+              <div style="font-size:12px;color:var(--text2);">${f.description}</div>
+            </div>`).join('')}
+        </div>
+      </div>`;
+  } catch(e) {
+    c.innerHTML = '<div style="color:var(--red);padding:20px;">Error cargando estrategia</div>';
+  }
+}
+
+// ─── Init ───────────────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  loadOverview();
+  connectWS();
+  setInterval(loadOverview, 30000);
+});
+
+// Actualizar loaders para nuevas páginas
+const _origShowPage = showPage;
+function showPage(id) {
+  _origShowPage(id);
+  if (id === 'logs')     loadLogs();
+  if (id === 'strategy') loadStrategy();
+}
+</script>
+</body>
+</html>
