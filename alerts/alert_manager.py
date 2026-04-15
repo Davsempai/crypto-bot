@@ -25,16 +25,21 @@ class AlertFormatter:
         funding_str = f"{funding:+.4f}%"
         vol_24h = market_data.get("volume_24h", 0)
 
+        # Precisión de decimales según precio del activo
+        price = market_data.get("price", signal.entry_high)
+        if price >= 10_000: d = 1
+        elif price >= 1_000: d = 2
+        elif price >= 100:   d = 3
+        elif price >= 1:     d = 4
+        else:                d = 5
+
+        def fp(v): return f"${v:,.{d}f}"
+
         # Calcular % de SL y TPs
         entry_mid = (signal.entry_low + signal.entry_high) / 2
-        if signal.direction == "LONG":
-            sl_pct = (signal.stop_loss - entry_mid) / entry_mid * 100
-            tp1_pct = (signal.tp1 - entry_mid) / entry_mid * 100
-            tp2_pct = (signal.tp2 - entry_mid) / entry_mid * 100
-        else:
-            sl_pct = (signal.stop_loss - entry_mid) / entry_mid * 100
-            tp1_pct = (signal.tp1 - entry_mid) / entry_mid * 100
-            tp2_pct = (signal.tp2 - entry_mid) / entry_mid * 100
+        sl_pct   = (signal.stop_loss - entry_mid) / entry_mid * 100
+        tp1_pct  = (signal.tp1 - entry_mid) / entry_mid * 100
+        tp2_pct  = (signal.tp2 - entry_mid) / entry_mid * 100
 
         confluences_text = "\n".join(f"  {c}" for c in signal.confluences)
         warnings_text = ("\n\n⚠️ *Advertencias:*\n" + "\n".join(f"  {w}" for w in signal.warnings)) if signal.warnings else ""
@@ -43,23 +48,21 @@ class AlertFormatter:
 
         msg = f"""{emoji} *{signal.direction} — {signal.pair}* {arrow}
 ━━━━━━━━━━━━━━━━━━━━━━━━
-📍 *Zona de Entrada:* `${signal.entry_low:,.2f} — ${signal.entry_high:,.2f}`
-🛑 *Stop Loss:*       `${signal.stop_loss:,.2f}` `({sl_pct:+.2f}%)`
-🎯 *TP1* (50%):       `${signal.tp1:,.2f}` `({tp1_pct:+.2f}%)`
-🏆 *TP2* (50%):       `${signal.tp2:,.2f}` `({tp2_pct:+.2f}%)`
+📍 *Zona Entrada:* `{fp(signal.entry_low)} — {fp(signal.entry_high)}`
+🛑 *Stop Loss:*    `{fp(signal.stop_loss)}` `({sl_pct:+.2f}%)`
+🎯 *TP1* (50%):    `{fp(signal.tp1)}` `({tp1_pct:+.2f}%)`
+🏆 *TP2* (50%):    `{fp(signal.tp2)}` `({tp2_pct:+.2f}%)`
 
-⚙️ *Datos de Futuros:*
-  • Funding Rate: `{funding_str}` {"🔥" if abs(funding) > 0.05 else "✅"}
+⚙️ *Futuros:*
+  • Funding: `{funding_str}` {"🔥" if abs(funding) > 0.05 else "✅"}
   • OI 1h: `{oi_change:+.2f}%` {oi_emoji}
-  • Volumen 24h: `${vol_24h:,.0f}`
 
-📐 *Análisis Técnico:*
+📐 *Confluencias:*
 {confluences_text}{warnings_text}
 
-📊 *R:R*: `1:{signal.rr_ratio}` | ⏱ *TF*: `{signal.timeframe}` | 🎯 *Confianza*: `{signal.confidence}%`
-⚖️ *Riesgo sugerido*: `{config.MAX_RISK_PER_TRADE}% del capital`{id_text}
-{"🧪 _PAPER TRADING — Sin dinero real_" if config.PAPER_TRADING else ""}
-
+📊 *R:R*: `1:{signal.rr_ratio}` | ⏱ `{signal.timeframe}` | 🎯 `{signal.confidence}%`
+⚖️ *Riesgo:* `{config.MAX_RISK_PER_TRADE}%`{id_text}
+{"🧪 _PAPER TRADING_" if config.PAPER_TRADING else ""}
 ⏰ `{datetime.utcnow().strftime('%Y-%m-%d %H:%M')} UTC`"""
 
         return msg

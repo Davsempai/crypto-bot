@@ -449,6 +449,13 @@ class TechnicalAnalyzer:
         entry_zone = self._find_entry_zone(fvgs, obs, direction, price, atr)
         entry_low  = entry_zone["bottom"]
         entry_high = entry_zone["top"]
+
+        # Sanity: la zona debe tener ancho positivo
+        if entry_high <= entry_low:
+            mid = (entry_high + entry_low) / 2
+            entry_low  = mid - atr * 0.5
+            entry_high = mid + atr * 0.5
+
         entry_mid  = (entry_low + entry_high) / 2
 
         # SL anclado al swing más reciente + buffer ATR pequeño
@@ -517,34 +524,55 @@ class TechnicalAnalyzer:
         logger.info(
             f"🎯 Señal V2: {pair} {direction} | "
             f"ADX:{adx:.1f} RSI:{rsi:.1f} | "
-            f"Entry:${entry_mid:,.2f} SL:${stop_loss:,.2f} TP2:${tp2:,.2f} R:R {rr}"
+            f"Entry:${entry_mid:,.{dec}f} SL:${stop_loss:,.{dec}f} "
+            f"TP1:${tp1:,.{dec}f} TP2:${tp2:,.{dec}f} R:R {rr}"
         )
         return signal
 
     def _find_entry_zone(self, fvgs, obs, direction, price, atr):
-        """Zona de entrada: FVG/OB dentro del 2% del precio, o ATR si no hay."""
+        """
+        Zona de entrada: FVG o OB más cercano dentro del 2.5% del precio.
+        Si no hay ninguno, usa una zona basada en ATR con ancho mínimo garantizado.
+        """
         candidates = []
         t = "BULLISH" if direction == "LONG" else "BEARISH"
         for fvg in fvgs:
             if fvg["type"] == t:
                 d = abs(fvg["midpoint"] - price) / price * 100
-                if d < 2.0:
+                if d < 2.5:
                     candidates.append({**fvg, "distance": d, "priority": 1})
         for ob in obs:
             if ob["type"] == t:
                 d = abs(ob["midpoint"] - price) / price * 100
-                if d < 2.5:
+                if d < 3.0:
                     candidates.append({**ob, "distance": d, "priority": 2})
 
         if candidates:
             candidates.sort(key=lambda x: (x["priority"], x["distance"]))
-            return candidates[0]
+            zone = candidates[0]
+            # Garantizar ancho mínimo de la zona: al menos 1 ATR
+            width = zone["top"] - zone["bottom"]
+            if width < atr:
+                mid = (zone["top"] + zone["bottom"]) / 2
+                zone = {"top": mid + atr * 0.5, "bottom": mid - atr * 0.5,
+                        "midpoint": mid, "type": zone["type"]}
+            return zone
 
-        # Fallback: zona alrededor del precio actual (ATR estrecho)
-        margin = atr * 0.4
+        # Fallback: zona centrada en el precio, ancho = 1 ATR (simétrica)
+        # Esto garantiza que entry_low ≠ entry_high y que el riesgo sea coherente
+        half = atr * 0.5
         if direction == "LONG":
-            return {"top": price + margin * 0.2, "bottom": price - margin}
-        return {"top": price + margin, "bottom": price - margin * 0.2}
+            return {
+                "top":      price + half * 0.3,   # zona ligeramente sobre el precio
+                "bottom":   price - half,          # zona llega hasta 0.5 ATR abajo
+                "midpoint": price - half * 0.35,
+            }
+        else:
+            return {
+                "top":      price + half,          # zona llega hasta 0.5 ATR arriba
+                "bottom":   price - half * 0.3,
+                "midpoint": price + half * 0.35,
+            }
 
 
 # Instancia global

@@ -2022,3 +2022,53 @@ Traceback (most recent call last):
 2026-04-13 16:09:58 [INFO] mtf — 🔍 MTF Analysis: BNBUSDT
 2026-04-13 16:10:04 [INFO] mtf — 🔍 MTF Analysis: XRPUSDT
 2026-04-13 16:10:31 [INFO] main — 👋 Sistema detenido
+2026-04-13 23:43:26 [INFO] main — =======================================================
+2026-04-13 23:43:26 [INFO] main — 🤖 CRYPTO FUTURES BOT v4
+2026-04-13 23:43:26 [INFO] main — =======================================================
+2026-04-13 23:43:26 [INFO] database — Base de datos inicializada correctamente
+2026-04-13 23:43:26 [INFO] main — ✅ Base de datos lista
+2026-04-13 23:43:26 [INFO] main — ✅ 🧪 PAPER TRADING | Pares: BTCUSDT, ETHUSDT, SOLUSDT, BNBUSDT, XRPUSDT
+2026-04-13 23:43:28 [INFO] exchange — 🔌 Exchange: Weex Futures API V3
+2026-04-13 23:43:30 [INFO] macro — ✅ Análisis macro: Claude Haiku activo
+2026-04-13 23:43:33 [INFO] telegram_bot — ✅ Monitor v3.1 iniciado
+2026-04-13 23:43:33 [INFO] signal_tracker — 📡 Trackeando señal #7: XRPUSDT SHORT
+2026-04-13 23:43:33 [INFO] signal_tracker — 📡 Trackeando señal #3: BNBUSDT SHORT
+2026-04-13 23:43:33 [INFO] signal_tracker — 📡 Trackeando señal #2: BNBUSDT SHORT
+2026-04-13 23:43:33 [INFO] signal_tracker — 📡 Trackeando señal #1: BNBUSDT SHORT
+2026-04-13 23:43:33 [INFO] signal_tracker — 🔍 Signal tracker iniciado — 4 señales activas
+2026-04-13 23:43:33 [INFO] main — 🚀 Sistema completo online:
+2026-04-13 23:43:33 [INFO] main —    🤖 Bot Telegram: activo
+2026-04-13 23:43:33 [INFO] main —    🌐 Dashboard: http://localhost:8080
+2026-04-13 23:43:33 [INFO] main —    📡 WebSocket: ws://localhost:8080/ws/live
+2026-04-13 23:43:34 [INFO] database — Señal 7 cerrada: SL | PnL: -1.00R
+2026-04-13 23:43:34 [INFO] signal_tracker — ❌ SL hit #7 XRPUSDT @ $1.37
+2026-04-13 23:43:35 [INFO] database — Señal 3 cerrada: SL | PnL: -1.00R
+2026-04-13 23:43:35 [INFO] signal_tracker — ❌ SL hit #3 BNBUSDT @ $613.01
+2026-04-13 23:43:36 [INFO] database — Señal 2 cerrada: SL | PnL: -1.00R
+2026-04-13 23:43:36 [INFO] signal_tracker — ❌ SL hit #2 BNBUSDT @ $613.00
+2026-04-13 23:43:38 [INFO] database — Señal 1 cerrada: SL | PnL: -1.00R
+2026-04-13 23:43:38 [INFO] signal_tracker — ❌ SL hit #1 BNBUSDT @ $613.00
+2026-04-13 23:44:35 [INFO] mtf — 🔍 MTF Analysis: BTCUSDT
+2026-04-13 23:44:40 [INFO] mtf — 🔍 MTF Analysis: ETHUSDT
+2026-04-13 23:44:45 [INFO] mtf — 🔍 MTF Analysis: SOLUSDT
+2026-04-13 23:44:46 [INFO] mtf — ✅ Señal MTF: SOLUSDT SHORT | Confianza: 60%
+2026-04-13 23:44:46 [INFO] signal_filter — ✅ Señal APROBADA: SOLUSDT SHORT | Grade: A+ | Score: 94/100 | Riesgo: 1.5%
+2026-04-13 23:44:46 [INFO] database — Señal guardada ID=16 — SOLUSDT SHORT
+2026-04-13 23:44:46 [INFO] signal_tracker — 📡 Nueva señal registrada para tracking: #16 SOLUSDT
+2026-04-13 23:44:48 [INFO] telegram_bot — 🎯 Señal A+ enviada: SOLUSDT SHORT
+2026-04-13 23:44:51 [INFO] mtf — 🔍 MTF Analysis: BNBUSDT
+2026-04-13 23:44:55 [INFO] mtf — 🔍 MTF Analysis: XRPUSDT
+2026-04-13 23:44:57 [INFO] mtf — ✅ Señal MTF: XRPUSDT SHORT | Confianza: 60%
+2026-04-13 23:44:57 [INFO] signal_filter — ✅ Señal APROBADA: XRPUSDT SHORT | Grade: A+ | Score: 88/100 | Riesgo: 1.5%
+2026-04-13 23:44:57 [INFO] database — Señal guardada ID=17 — XRPUSDT SHORT
+2026-04-13 23:44:57 [INFO] signal_tracker — 📡 Nueva señal registrada para tracking: #17 XRPUSDT
+2026-04-13 23:44:58 [INFO] telegram_bot — 🎯 Señal A+ enviada: XRPUSDT SHORT
+2026-04-13 23:45:10 [INFO] signal_tracker — 🎯 TP1 hit #17 XRPUSDT @ $1.37
+2026-04-13 23:45:35 [INFO] mtf — 🔍 MTF Analysis: BTCUSDT
+2026-04-13 23:45:40 [INFO] mtf — 🔍 MTF Analysis: ETHUSDT
+2026-04-13 23:45:44 [INFO] mtf — 🔍 MTF Analysis: SOLUSDT
+2026-04-13 23:45:45 [INFO] mtf — ✅ Señal MTF: SOLUSDT SHORT | Confianza: 60%
+2026-04-13 23:45:49 [INFO] mtf — 🔍 MTF Analysis: BNBUSDT
+2026-04-13 23:45:53 [INFO] mtf — 🔍 MTF Analysis: XRPUSDT
+2026-04-13 23:45:56 [INFO] mtf — ✅ Señal MTF: XRPUSDT SHORT | Confianza: 60%
+2026-04-13 23:46:29 [INFO] main — 👋 Sistema detenido
